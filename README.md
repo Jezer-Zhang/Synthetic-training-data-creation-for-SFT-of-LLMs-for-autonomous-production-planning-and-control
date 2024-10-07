@@ -4,7 +4,7 @@ Given the stringent data security requirements in the industry, optimizing the u
 # Methodology
 First, the physical autonomous system was modeled into event logs that LLMs can unterstand. These event logs contain sensor signal changes, actuator operation and command functions that LLM agents call. Then a dataset was created based on a brainstorm structure, which covers many real-world cases. Subsequently, based on this dataset, different fine-tuning strategies were executed and the performances were evaluated.
 
-https://github.com/Jezer-Zhang/Synthetic-training-data-creation-for-SFT-of-LLMs-for-autonomous-production-planning-and-control/blob/main/multi_media/ICRA_LLM_AT_cor.mp4
+![video](https://github.com/Jezer-Zhang/Synthetic-training-data-creation-for-SFT-of-LLMs-for-autonomous-production-planning-and-control/blob/main/multi_media/ICRA_LLM_AT_cor.mp4)
 
 # Results
 The hypothesis that such fine-tuning could significantly enhance operational efficiencies was proved by the results, which demonstrated improvements in accuracy of production planning and control. This finding underscores the potential of integrating fine-tuned LLMs into autonomous systems, further supported by the negligible presence of catastrophic forgetting and overfitting in our results. Significantly, these results suggest the possibility of employing an open-source model such as Llama3-70B over proprietary models like GPT-4.0 for autonomous tasks.
