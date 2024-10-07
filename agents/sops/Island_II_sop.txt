@@ -1,0 +1,16 @@
+1.When Robotino has docked with 'Island II', call functions [C3_run('forward', 8), branch_divert()].
+2.When BG41 detects a workpiece at stopper S3, if BG45 doesn't detect the other workpiece, indicating that the sub-section is not jammed, call functions [S3_release(), C2_run('forward', 8)]; If BG45 detects the other workpiece, indicating that the sub-section is jammed, the workpiece will wait at stopper S3. After the other workpiece passes, call functions [S3_release(), C2_run('forward', 8)].
+3.When BG27 detects the workpiece at the outlet of conveyor C2, call function C2_run('forward', 2).
+4.When BG56 detects the workpiece at the infeed of conveyor C1, call function C1_run('forward',13).
+5.TF81 reads information from the workpiece. Information for machining process is retrieved: [{\"material\": str}, {\"tool_id\": str}, {\"spindle_rpm\": int}, {\"cutting_depth\": float}, {\"cutting_length\": float}].
+6.When BG51 detects the workpiece at stopper S2 on conveyor C1, indicating that the workpiece arrives at the CNC station, call function load_workpiece().
+7.When the workpiece is loaded into CNC machine, call function choose_tool(tool_id: str).
+8.When PG51 detects the tool at initial position, call functions [start_spindle(speed: int), apply_coolant('pulsed')].
+9.When PG52 detects the correct placement of the workpiece, call function start_cutting(depth: float, length: float).
+10.When CNC processing is finished, call function stop_series() 
+11.When the machine is stopped, call function unload_workpiece().
+12.When the workpiece is unloaded out of CNC machine, call functions [S2_release(), C1_run('forward', 8), robot_request('Island II', 'in')].
+13.When BG57 detects the workpiece at the outlet of conveyor C1, call function C1_run('forward', 2).
+14.When BG26 detects the workpiece at the infeed of conveyor C2, call function C2_run('forward',13).
+15.When Branch is already set to divert the workpieces and BG21 detects workpieces at stopper S1, call functions [S1_release(), C4_run('forward', 8)].
+16.When BG42 detects the workpiece on conveyor C4, if Robotino has not docked with the island, call function C4_stop(); if Robotino  has docked with the island, no functions need to be called.

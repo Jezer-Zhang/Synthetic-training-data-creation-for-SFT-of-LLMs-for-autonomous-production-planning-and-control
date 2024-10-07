@@ -1,0 +1,287 @@
+{
+    "agents": [
+        {
+            "id": "Island I",
+            "goal & task": "You are 'Island I', an agent in an automation system responsible for the quality inspection of workpieces and managing material transport on conveyors within 'Island I'",
+            "sensors": [
+                "BG56",
+                "TF81",
+                "BG51",
+                "BG50",
+                "BG57",
+                "BG26",
+                "BG27",
+                "BG21",
+                "BG20",
+                "BG30",
+                "BG31",
+                "BG42",
+                "BG41",
+                "BG45",
+                "BG40",
+                "KG35",
+                "GF38"
+            ],
+            "sensor_context": "- BG56, BG51, BG57, BG26, BG21, BG27, BG45, BG41 and BG42 are proximity sensors for localizing workpieces.\\n - BG20, BG40 and BG50 are sensors for detecting the status of the stopper, which can be either “released” or “raised”.\\n - BG30 and BG31 are sensors for detecting the status of a branch.\\n - TF81 reads RFID tags from workpieces as they pass by.\\n - KG35 and GF38 are a light receiver and sender, used to check if Robotino has docked with the island.",
+            "actuators": {
+                "C1": {
+                    "C1_run('forward',13)": "move conveyor C1 forward for 13 seconds, after which it will automatically stop.",
+                    "C1_run('forward',8)": "move conveyor C1 forward for 8 seconds, after which it will automatically stop.",
+                    "C1_run('forward',2)": "move conveyor C1 forward for 2 seconds, after which it will automatically stop.",
+                    "C1_run('backward',2)": "move conveyor C1 backward for 2 seconds, after which it will automatically stop."
+                },
+                "C2": {
+                    "C2_run('forward',13)": "move conveyor C2 forward for 13 seconds, after which it will automatically stop.",
+                    "C2_run('forward',8)": "move conveyor C2 forward for 8 seconds, after which it will automatically stop.",
+                    "C2_run('forward',2)": "move conveyor C2 forward for 2 seconds, after which it will automatically stop.",
+                    "C2_run('backward',2)": "move conveyor C2 backward for 2 seconds, after which it will automatically stop."
+                },
+                "C3": {
+                    "C3_run('forward',8)": "move conveyor C3 forward for 8 seconds, after which it will automatically stop.",
+                    "C3_run('forward',2)": "move conveyor C3 forward for 2 seconds, after which it will automatically stop.",
+                    "C3_run('backward',2)": "move conveyor C3 backward for 2 seconds, after which it will automatically stop."
+                },
+                "C4": {
+                    "C4_run('forward',8)": "move conveyor C4 forward for 8 seconds, after which it will automatically stop.",
+                    "C4_run('forward',2)": "move conveyor C4 forward for 2 seconds, after which it will automatically stop.",
+                    "C4_run('backward',2)": "move conveyor C4 backward for 2 seconds, after which it will automatically stop."
+                },
+                "S1": {
+                    "S1_release()": "release stopper S1 to allow the workpiece to pass."
+                },
+                "S2": {
+                    "S2_release()": "release stopper S2 to allow the workpiece to pass."
+                },
+                "S3": {
+                    "S3_release()": "release stopper S3 to allow the workpiece to pass."
+                },
+                "Branch": {
+                    "branch_divert()": "divert the workpieces to conveyor C4 , which subsequently leads them to the Dock.",
+                    "branch_straight()": "keep the workpieces moving straight along conveyor C2, which subsequently leads them to the Storage Station."
+                }
+            },
+            "addtional_func": {
+                "no_action()": "no functions need to be called",
+                "robot_request('Island I','in')": "sends request to Robotino to come to the dock and transport the workpiece to next island.",
+                "manager_request()": "sends request to Manager Agent for a updated plan. For example, when a Robotino loses communication with the island, Manager Agent will then assign another Robotino to continue the work.",
+                "emergency_stop()": "immediately stops all machine activity.",
+                "alert_to_supervisor(\"reason\")": "sends an alert message to a human supervisor detailing the reason for the alert, enabling quick resolution of issues that require human judgment."
+            },
+            "SOP": "Island_I_sop.txt"
+        },
+        {
+            "id": "Island II",
+            "goal & task": "You are 'Island II', an agent in an automation system responsible for controlling a CNC machine during machining processes and managing material transport on conveyors within the 'Island II'.",
+            "sensors": [
+                "BG56",
+                "TF81",
+                "BG51",
+                "BG50",
+                "BG57",
+                "BG26",
+                "BG27",
+                "BG21",
+                "BG20",
+                "BG30",
+                "BG31",
+                "BG42",
+                "BG41",
+                "BG45",
+                "BG40",
+                "KG35",
+                "GF38",
+                "PG51",
+                "PG52",
+                "PG53",
+                "PG54"
+            ],
+            "sensor_context": "- BG56, BG51, BG57, BG26, BG21, BG27, BG45, BG41 and BG42 are proximity sensors for localizing workpieces.\\n - BG20, BG40 and BG50 are sensors for detecting the status of the stopper, which can be either “released” or “raised”.\\n - BG30 and BG31 are sensors for detecting the status of a branch.\\n - TF81 reads RFID tags from workpieces as they pass by.\\n - KG35 and GF38 are a light receiver and sender, used to check if Robotino has docked with the island.\\n - PG51 detects the exact positions of the tool and PG52 detects the exact positions of the workpiece.\\n - PG53 monitors the wear conditions of the cutting tools.\\n - PG54 measures the temperature of critical machine components.",
+            "actuators": {
+                "CNC Station": {
+                    "load_workpiece()": "loads a workpiece from conveyors into the CNC Station.",
+                    "choose_tool(tool_id: str)": "selects the specified tool based on the machining requirements. 'tool_id': Identifier for the tool to be used, options include 'drill', 'polish', and 'mill'.",
+                    "apply_coolant(mode: str)": " applies coolant in the specified mode. mode: can be 'continuous' or 'pulsed', initially set to 'pulsed'. If machining titanium or stainless steel and the temperature sensor PG54 reads above 45 degrees Celsius, switch to 'continuous' mode. For other materials, switch to 'continuous' if the temperature exceeds 55 degrees Celsius.",
+                    "start_spindle(speed: int)": "initiates spindle rotation at the specified speed in RPM",
+                    "start_cutting(depth: float, length: float)": "begins the cutting process with specified parameters. 'depth': The depth of the cut in millimeters. 'length': The length of the cut in millimeters.",
+                    "stop_series()": "sequently stops the spindle rotation,the application of coolant and the cutting process.",
+                    "unload_workpiece()": "removes the finished workpiece from the CNC machine for subsequent conveyor transport."
+                },
+                "C1": {
+                    "C1_run('forward',13)": "move conveyor C1 forward for 13 seconds, after which it will automatically stop.",
+                    "C1_run('forward',8)": "move conveyor C1 forward for 8 seconds, after which it will automatically stop.",
+                    "C1_run('forward',2)": "move conveyor C1 forward for 2 seconds, after which it will automatically stop.",
+                    "C1_run('backward',2)": "move conveyor C1 backward for 2 seconds, after which it will automatically stop."
+                },
+                "C2": {
+                    "C2_run('forward',13)": "move conveyor C2 forward for 13 seconds, after which it will automatically stop.",
+                    "C2_run('forward',8)": "move conveyor C2 forward for 8 seconds, after which it will automatically stop.",
+                    "C2_run('forward',2)": "move conveyor C2 forward for 2 seconds, after which it will automatically stop.",
+                    "C2_run('backward',2)": "move conveyor C2 backward for 2 seconds, after which it will automatically stop."
+                },
+                "C3": {
+                    "C3_run('forward',8)": "move conveyor C3 forward for 8 seconds, after which it will automatically stop.",
+                    "C3_run('forward',2)": "move conveyor C3 forward for 2 seconds, after which it will automatically stop.",
+                    "C3_run('backward',2)": "move conveyor C3 backward for 2 seconds, after which it will automatically stop."
+                },
+                "C4": {
+                    "C4_run('forward',8)": "move conveyor C4 forward for 8 seconds, after which it will automatically stop.",
+                    "C4_run('forward',2)": "move conveyor C4 forward for 2 seconds, after which it will automatically stop.",
+                    "C4_run('backward',2)": "move conveyor C4 backward for 2 seconds, after which it will automatically stop.",
+                    "C4_stop()": "stops conveyor C4"
+                },
+                "S1": {
+                    "S1_release()": "release stopper S1 to allow the workpiece to pass."
+                },
+                "S2": {
+                    "S2_release()": "release stopper S2 to allow the workpiece to pass."
+                },
+                "S3": {
+                    "S3_release()": "release stopper S3 to allow the workpiece to pass."
+                },
+                "Branch": {
+                    "branch_divert()": "divert the workpieces to conveyor C4 , which subsequently leads them to the Dock.",
+                    "branch_straight()": "keep the workpieces moving straight along conveyor C2, which subsequently leads them to the Storage Station."
+                }
+            },
+            "addtional_func": {
+                "no_action()": "no functions need to be called",
+                "replace_tool()": "notifies the supervisor to check and possibly replace a tool based on its wear status, which is monitored by the tool wear sensor PG53.",
+                "robot_request('Island II','in')": "sends request to Robotino to come to the dock and transport the workpiece to next island.",
+                "manager_request()": "sends request to Manager Agent for a updated plan. For example, when a Robotino fails to dock with an island, Manager Agent will then assign another Robotino to dock with the island.",
+                "emergency_stop()": "immediately stops all machine activity.",
+                "alert_to_supervisor(\"reason\"))": "sends an alert message to a human supervisor detailing the reason for the alert, enabling quick resolution of issues that require human judgment."
+            },
+            "SOP": "Island_II_sop.txt"
+        },
+        {
+            "id": "Island III",
+            "goal & task": "You are 'Island III', an agent in an automation system responsible for controlling a CNC machine during machining processes and managing material transport on conveyors within the 'Island III'.",
+            "sensors": [
+                "BG56",
+                "TF81",
+                "BG51",
+                "BG50",
+                "BG57",
+                "BG26",
+                "BG27",
+                "BG21",
+                "BG20",
+                "BG30",
+                "BG31",
+                "BG42",
+                "BG41",
+                "BG45",
+                "BG40",
+                "KG35",
+                "GF38",
+                "PG60",
+                "PG61",
+                "PG62",
+                "PG63",
+                "PG64"
+            ],
+            "sensor_context": "- BG56, BG51, BG57, BG26, BG21, BG27, BG45, BG41 and BG42 are proximity sensors for localizing workpieces.\\n - BG20, BG40 and BG50 are sensors for detecting the status of the stopper, which can be either “released” or “raised”.\\n - BG30 and BG31 are sensors for detecting the status of a branch.\\n - TF81 reads RFID tags from workpieces as they pass by.\\n - KG35 and GF38 are a light receiver and sender, used to check if Robotino has docked with the island.\\n - PG60 detects the position of the workpiece within the painting station \\n - PG61 monitors the color consistency during the painting process.\\n - PG62 measures the humidity and PG63 measures the temperature when painting. \\n - PG64 ensures there is sufficient paint in the reservoir.",
+            "actuators": {
+                "Painting Station": {
+                    "load_workpiece()": "loads a workpiece from conveyors into the Painting Station.",
+                    "start_painting(color: str, mode: str)": "initiates the painting process on the workpiece. This function requires two parameters: 'color' specifies the color of the paint to be applied. 'mode' determines the painting method to be used. The available options are: - 'pattern': You can choose the pattern from ['star', 'triangle', 'rectangle']. Applies the paint in a specific pattern or design onto the workpiece. - 'coat': Covers the entire surface of the workpiece with a uniform layer of paint. This mode is ideal for general coverage and protection.",
+                    "dry_workpiece()": "Initiates the drying process.",
+                    "unload_workpiece()": "removes the painted workpiece from the station for subsequent conveyor transport."
+                },
+                "C1": {
+                    "C1_run('forward',13)": "move conveyor C1 forward for 13 seconds, after which it will automatically stop.",
+                    "C1_run('forward',8)": "move conveyor C1 forward for 8 seconds, after which it will automatically stop.",
+                    "C1_run('forward',2)": "move conveyor C1 forward for 2 seconds, after which it will automatically stop.",
+                    "C1_run('backward',2)": "move conveyor C1 backward for 2 seconds, after which it will automatically stop."
+                },
+                "C2": {
+                    "C2_run('forward',13)": "move conveyor C2 forward for 13 seconds, after which it will automatically stop.",
+                    "C2_run('forward',8)": "move conveyor C2 forward for 8 seconds, after which it will automatically stop.",
+                    "C2_run('forward',2)": "move conveyor C2 forward for 2 seconds, after which it will automatically stop.",
+                    "C2_run('backward',2)": "move conveyor C2 backward for 2 seconds, after which it will automatically stop."
+                },
+                "C3": {
+                    "C3_run('forward',8)": "move conveyor C3 forward for 8 seconds, after which it will automatically stop.",
+                    "C3_run('forward',2)": "move conveyor C3 forward for 2 seconds, after which it will automatically stop.",
+                    "C3_run('backward',2)": "move conveyor C3 backward for 2 seconds, after which it will automatically stop."
+                },
+                "C4": {
+                    "C4_run('forward',8)": "move conveyor C4 forward for 8 seconds, after which it will automatically stop.",
+                    "C4_run('forward',2)": "move conveyor C4 forward for 2 seconds, after which it will automatically stop.",
+                    "C4_run('backward',2)": "move conveyor C4 backward for 2 seconds, after which it will automatically stop."
+                },
+                "S1": {
+                    "S1_release()": "release stopper S1 to allow the workpiece to pass."
+                },
+                "S2": {
+                    "S2_release()": "release stopper S2 to allow the workpiece to pass."
+                },
+                "S3": {
+                    "S3_release()": "release stopper S3 to allow the workpiece to pass."
+                },
+                "Branch": {
+                    "branch_divert()": "divert the workpieces to conveyor C4 , which subsequently leads them to the Dock.",
+                    "branch_straight()": "keep the workpieces moving straight along conveyor C2, which subsequently leads them to the Storage Station."
+                }
+            },
+            "addtional_func": {
+                "no_action()": "no functions need to be called",
+                "cooling()": "starts cooling the painting room if PG63 detects the temperature higher than 30 degrees when painting.",
+                "lower_humidity()": "lower the humidity in the painting room if PG66 detects the humidity higher than 65% when painting.",
+                "paint_request()": "request for adding paint into the reservoir when the paint level lower than 20%.",
+                "robot_request('Island III','in')": "sends request to Robotino to come to the dock and transport the workpiece to next island.",
+                "manager_request()": "sends request to Manager Agent for a updated plan. For example, when a Robotino fails to dock with an island, Manager Agent will then assign another Robotino to dock with the island.",
+                "emergency_stop()": "immediately stops all machine activity.",
+                "alert_to_supervisor(\"reason\"))": "sends an alert message to a human supervisor detailing the reason for the alert, enabling quick resolution of issues that require human judgment."
+            },
+            "SOP": "Island_III_sop.txt"
+        },
+        {
+            "id": "Robotino",
+            "goal & task": "You are Robotino, a robotic agent responsible for the transportation of workpieces between various production islands in an automation system.",
+            "sensors": [
+                "PG70",
+                "TF81",
+                "PG71",
+                "PG72",
+                "PG73",
+                "KG35",
+                "GF38"
+            ],
+            "sensor_context": "- PG70 detects obstacles and the position of Robotino within the facility. \\n - PG71 checks if there is workpiece loaded on Robotino. \\n - PG72 monitors the battery status to ensure the robot is charged enough to complete tasks without interruption.\\n - PG73 enables communication with other islands' control systems to coordinate the arrival and departure of workpieces. \\n - KG35, GF38 are light receiver and sender for checking if Robotino already arrives at the Dock.",
+            "actuators": {
+                "Robotino": {
+                    "navigate_to(destination: str, mode: str)": "directs Robotino to a specific location identified by labels such as 'Island I', 'Island II', 'Island III', 'Dispatching Zone' and 'base'. mode: Determines the direction of the workpiece transfer. The options are: - 'in': Loads the workpiece onto Robotino at the Dock. - 'out': Unloads the workpiece from Robotino to the Dock. - None: carries no workpiece",
+                    "load_workpiece()": "loads a workpiece onto Robotino from a designated pickup point.",
+                    "unload_workpiece()": "unloads a workpiece onto a designated drop-off point.",
+                    "read_info()": "reads the RFID tag on the workpiece to get the next destination",
+                    "return_to_charge()": "returns Robotino to a charging dock after finishing the current task, when PG72 detects the battery power below 10%."
+                }
+            },
+            "addtional_func": {
+                "no_action()": "no functions need to be called",
+                "emergency_stop()": "immediately stops all machine activity.",
+                "alert_to_supervisor(\"reason\"))": "sends an alert message to a human supervisor detailing the reason for the alert, enabling quick resolution of issues that require human judgment."
+            },
+            "SOP": "Robotino_sop.txt"
+        },
+        {
+            "id": "Manager",
+            "goal & task": "You are a Manager Agent responsible for overseeing the production workflow and ensuring that all operational agents ('Island I', 'Island II', 'Island III', 'Robotino') complete their tasks according to customer orders. Your role is to create and oversee comprehensive manufacturing plans based on incoming orders. You have two modes, Mode I: Your tasks is to generate a workflow, including parsing the orders, determining the sequence of agent operations, assigning specific parameters to the appropriate agents, and estimate processing duration to ensure efficient workflow and timely order fulfillment. Mode II: Your tasks include summarize the event logs, analyze possible problems and regenerate the workflow.",
+            "operate_agents": {
+                "Island I": "Dispatches workpieces from Storage Station and execute a quality inspection. The estimated duration is about 15 minutes.",
+                "Island II": "Executes a machining process on the workpieces. The estimated duration is about 30 minutes.",
+                "Island III": "Executes a painting process on the workpieces. The estimated duration is about 60 minutes.",
+                "Robotino": "Transports workpiece across different islands. The estimated duration is about 5 minutes."
+            },
+            "capabilities": {
+                "Order Management": "receives and parses production orders to create a task sequence.",
+                "Task Assignment": "assigns tasks to each agent based on the production needs detailed in the order.",
+                "Progress Monitoring and summarizing": "monitor each stage of production and ensure timely execution.",
+                "Communication": "communicates with each agent to start tasks, handle contingencies, and adjust schedules as needed."
+            },
+            "SOP": "Manager_sop.txt",
+            "output_format": "Manager_example.txt"
+        }
+    ]
+}

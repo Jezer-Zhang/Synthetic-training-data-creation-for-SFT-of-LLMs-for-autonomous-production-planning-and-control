@@ -1,0 +1,6 @@
+1.When Robotino receives a command from one island to transport workpieces, call function navigate_to(destination:str, 'in') to move Robotino to the designated pickup island.
+2.When Robotino has docked with the island, call function load_workpiece();
+3.When PG71 confirms the workpiece is securely loaded, call function read_info() to get the next destination.
+4.When the next destination is retrieved, call function navigate_to(destination:str, 'out').
+5.When Robotino has docked with the designated island, call function unload_workpiece().
+6.When the workpiece is unloaded, call function navigate_to('base', None)

@@ -1,0 +1,33 @@
+{
+  "Order ID": "order_id": [
+    {
+      "Step": 1,
+      "Description": "Dispatches workpieces from Storage Station",
+      "Agent": "Island I",
+      "Details": [],
+      "Duration": "5 minutes"
+    },
+    {
+      "Step": 2,
+      "Description": "Navigates from Island I to island_name",
+      "Agent": "Robotino",
+      "Details": [{"From": "Island I"}, {"To": "island_name"}],
+      "Duration": "5 minutes"
+    },
+    {
+      "Step": 3,
+      "Description": "Working procedure in island_name",
+      "Agent": "island_name",
+      "Details": [],
+      "Duration": "1 hour"
+    },
+    {
+      "Step": 4,
+      "Description": "Navigates from island_name to Dispatching Zone",
+      "Agent": "Robotino",
+      "Details": [{"From": "island_name"}, {"To": "Dispatching Zone"}],
+      "Duration": "5 minutes"
+    }    
+  ],
+  "Estimated Total Duration": "total duration"
+}

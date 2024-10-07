@@ -1,0 +1,828 @@
+{
+    "Island I": [
+        {
+            "test_point_Nr.": 1,
+            "type": "SOP",
+            "content": "\n[00:00:01] BG56 detects a workpiece at the infeed of conveyor C1.\n",
+            "command": "C1_run('forward',13)",
+            "reason": "Workpiece detected at the infeed of conveyor C1."
+        },
+        {
+            "test_point_Nr.": 2,
+            "type": "SOP",
+            "content": "\n[00:00:08] TF81 reads information from the workpiece.\n[00:00:09] the RFID tag on the workpiece is authorized.\n",
+            "command": "branch_divert(), robot_request('Island I', 'in')",
+            "reason": "The RFID tag on the workpiece is authorized, dispatch to Dock."
+        },
+        {
+            "test_point_Nr.": 3,
+            "type": "SOP",
+            "content": "\n[00:00:08] TF81 reads information from the workpiece.\n[00:00:09] the RFID tag on the workpiece is not authorized.\n",
+            "command": "branch_straight()",
+            "reason": "Workpiece does not meet quality standards, diverting to Storage Station."
+        },
+        {
+            "test_point_Nr.": 4,
+            "type": "SOP",
+            "content": "\n[00:00:05] TF81 reads information from the workpiece. The RFID tag on the workpiece is authorized.\n[00:00:07] Island I calls function: branch_divert(), robot_request('Island I', 'in')\n[00:00:09] Branch is already set to divert the workpieces.\n[00:00:10] BG51 detects a workpiece at stopper S2 on conveyor C1.\n",
+            "command": "S2_release(), C1_run('forward', 8)",
+            "reason": "BG51 detects a workpiece at stopper S2 and no jam detected."
+        },
+        {
+            "test_point_Nr.": 5,
+            "type": "SOP",
+            "content": "\n[00:00:10] BG51 detects a workpiece at stopper S2 on conveyor C1.\n[00:00:10] BG57 detects a workpiece, indicating that the sub-section is jammed.\n",
+            "command": "no_action()",
+            "reason": "Workpiece waits at stopper S2 until the sub-section is no longer jammed."
+        },
+        {
+            "test_point_Nr.": 6,
+            "type": "SOP",
+            "content": "\n[00:00:10] BG51 detects a workpiece at stopper S2 on conveyor C1.\n[00:00:10] BG57 detects a workpiece, indicating that the sub-section is jammed.\n[00:00:12] A workpiece passes BG57.\n",
+            "command": "S2_release(), C1_run('forward', 8)",
+            "reason": "Sub-section is no longer jammed, workpiece can now proceed from S2."
+        },
+        {
+            "test_point_Nr.": 7,
+            "type": "SOP",
+            "content": "\n[00:00:17] BG26 detects a workpiece at the infeed of the conveyor C2.\n",
+            "command": "C2_run('forward', 13)",
+            "reason": "Workpiece detected at the infeed of conveyor C2."
+        },
+        {
+            "test_point_Nr.": 8,
+            "type": "SOP",
+            "content": "\n[00:00:10] Branch is already set to divert the workpieces.\n[00:00:10] BG51 detects a workpiece at stopper S2 on conveyor C1.\n[00:00:11] 'Island I' calls function S2_release(), C1_run('forward', 8).\n[00:00:12] stopper S2 is released.\n[00:00:13] A workpiece passes BG51.\n[00:00:13] stopper S2 is raised.\n[00:00:17] BG26 detects a workpiece at the infeed of the conveyor C2.\n[00:00:18] 'Island I' calls function C2_run('forward', 13).\n[00:00:18] A workpiece passes BG26.\n[00:00:20] BG21 detects a workpiece at stopper S1 on conveyor C2.\n",
+            "command": "S1_release(), C4_run('forward', 8)",
+            "reason": "Branch is set to divert; release stopper S1 and move workpiece along conveyor C4."
+        },
+        {
+            "test_point_Nr.": 9,
+            "type": "SOP",
+            "content": "\n[00:00:10] Branch is already set to direct the workpieces straight.\n[00:00:10] BG51 detects a workpiece at stopper S2 on conveyor C1.\n[00:00:11] 'Island I' calls function S2_release(), C1_run('forward', 8).\n[00:00:12] stopper S2 is released.\n[00:00:13] A workpiece passes BG51.\n[00:00:13] stopper S2 is raised.\n[00:00:17] BG26 detects a workpiece at the infeed of the conveyor C2.\n[00:00:18] 'Island I' calls function C2_run('forward', 13).\n[00:00:18] A workpiece passes BG26.\n[00:00:20] BG21 detects a workpiece at stopper S1 on conveyor C2.\n",
+            "command": "S1_release(), C2_run('forward', 8)",
+            "reason": "BG21 detects workpiece at stopper S1 and branch is set to direct workpieces straight."
+        },
+        {
+            "test_point_Nr.": 10,
+            "type": "SOP",
+            "content": "\n[00:00:26] BG27 detects a workpiece at the outlet of conveyor C2.\n",
+            "command": "C2_run('forward', 2)",
+            "reason": "Move workpiece off the outlet of conveyor C2."
+        },
+        {
+            "test_point_Nr.": 11,
+            "type": "SOP",
+            "content": "\n[00:00:10] Branch is already set to divert the workpieces.\n[00:00:10] BG51 detects a workpiece at stopper S2 on conveyor C1.\n[00:00:11] 'Island I' calls function S2_release(), C1_run('forward', 8).\n[00:00:12] stopper S2 is released.\n[00:00:13] A workpiece passes BG51.\n[00:00:13] stopper S2 is raised.\n[00:00:17] BG26 detects a workpiece at the infeed of the conveyor C2.\n[00:00:18] 'Island I' calls function C2_run('forward', 13).\n[00:00:18] A workpiece passes BG26.\n[00:00:20] BG21 detects a workpiece at stopper S1 on conveyor C2.\n[00:00:21] 'Island I' calls function S1_release(), C4_run('forward', 8).\n[00:00:22] stopper S1 is released.\n[00:00:23] A workpiece passes BG21.\n[00:00:23] stopper S1 is raised.\n[00:00:20] Robotino has docked with the island.\n[00:00:25] BG42 detects a workpiece at the infeed of conveyor C4.\n",
+            "command": "no_action()",
+            "reason": "Robotino has docked with the island, no action needed."
+        },
+        {
+            "test_point_Nr.": 12,
+            "type": "SOP",
+            "content": "\n[00:00:10] Branch is already set to divert the workpieces.\n[00:00:10] BG51 detects a workpiece at stopper S2 on conveyor C1.\n[00:00:11] 'Island I' calls function S2_release(), C1_run('forward', 8).\n[00:00:12] stopper S2 is released.\n[00:00:13] A workpiece passes BG51.\n[00:00:13] stopper S2 is raised.\n[00:00:17] BG26 detects a workpiece at the infeed of the conveyor C2.\n[00:00:18] 'Island I' calls function C2_run('forward', 13).\n[00:00:18] A workpiece passes BG26.\n[00:00:20] BG21 detects a workpiece at stopper S1 on conveyor C2.\n[00:00:21] 'Island I' calls function S1_release(), C4_run('forward', 8).\n[00:00:22] stopper S1 is released.\n[00:00:23] A workpiece passes BG21.\n[00:00:23] stopper S1 is raised.\n[00:00:25] BG42 detects a workpiece at the infeed of conveyor C4.\n",
+            "command": "C4_stop()",
+            "reason": "workpiece will stop at BG42, awaiting Robotino docking "
+        },
+        {
+            "test_point_Nr.": 13,
+            "type": "Sensor Malfunctions",
+            "content": "\n[00:00:01] BG56 detects a workpiece at the infeed of conveyor C1.\n[00:00:01] 'Island I' calls function C1_run('forward', 13).\n[00:00:08] TF81 failed to read information from the workpiece.\n",
+            "command": "alert_to_supervisor('TF81 reading failure')",
+            "reason": "TF81 failed to read information from the workpiece."
+        },
+        {
+            "test_point_Nr.": 14,
+            "type": "Actuator Failure",
+            "content": "\n[00:00:09] BG51 detects a workpiece at stopper S2 on conveyor C1.\n[00:00:09] A workpiece passes BG51.\n",
+            "command": "alert_to_supervisor('stopper S2 failure')",
+            "reason": "A workpiece passes BG51 before function S2_release() is called."
+        },
+        {
+            "test_point_Nr.": 15,
+            "type": "Actuator Failure",
+            "content": "\n[00:00:09] the RFID tag on the workpiece is authorized.\n[00:00:09] 'Island I' calls function branch_divert().\n[00:00:10] Branch failed to divert.\n",
+            "command": "alert_to_supervisor('Branch diversion failure')",
+            "reason": "Branch failed to divert workpiece; requires human intervention."
+        },
+        {
+            "test_point_Nr.": 16,
+            "type": "Unexpected Events",
+            "content": "\n[00:00:09] the RFID tag on the workpiece is authorized.\n[00:00:09] 'Island I' calls function branch_divert().\n[00:00:10] Branch is already set to divert the workpieces.\n[00:00:10] BG51 detects a workpiece at stopper S2 on conveyor C1.\n[00:00:11] 'Island I' calls function S2_release(), C1_run('forward', 8).\n[00:00:12] Branch is already set to direct the workpieces straight.\n",
+            "command": "branch_divert()",
+            "reason": "To redirect authorized workpiece to Dock."
+        },
+        {
+            "test_point_Nr.": 17,
+            "type": "Unexpected Events",
+            "content": "\n[00:00:09] the RFID tag on the workpiece is not authorized.\n[00:00:09] 'Island I' calls function branch_straight().\n[00:00:10] Branch is already set to direct the workpieces straight.\n[00:00:10] BG51 detects a workpiece at stopper S2 on conveyor C1.\n[00:00:11] 'Island I' calls function S2_release(), C1_run('forward', 8).\n[00:00:12] Branch is already set to divert the workpieces.\n",
+            "command": "branch_straight()",
+            "reason": "To redirect unauthorized workpiece to Storage Station."
+        },
+        {
+            "test_point_Nr.": 18,
+            "type": "Unexpected Events",
+            "content": "\n[00:00:01] BG56 detects a workpiece at the infeed of conveyor C1.\n[00:00:02] 'Island I' calls function C1_run('forward', 13).\n[00:00:03] Electrical failure.\n",
+            "command": "alert_to_supervisor('Electrical failure')",
+            "reason": "Electrical failure detected, inform supervisor immediately."
+        },
+        {
+            "test_point_Nr.": 19,
+            "type": "Unexpected Events",
+            "content": "\n[00:00:09] the RFID tag on the workpiece is authorized.\n[00:00:09] 'Island I' calls function branch_divert(), robot_request('Island I', 'in').\n[00:00:10] Communication failure with Robotino.\n",
+            "command": "manager_request(), alert_to_supervisor('Communication failure')",
+            "reason": "Communication failure with Robotino, requesting an updated plan and notifying supervisor."
+        },
+        {
+            "test_point_Nr.": 20,
+            "type": "Time out",
+            "content": "\n[00:00:01] BG56 detects a workpiece at the infeed of conveyor C1.\n[00:00:02] 'Island I' calls function C1_run('forward', 13).\n[00:00:12] Inactivity timeout.\n",
+            "command": "alert_to_supervisor('timeout')",
+            "reason": "No activity for a duration, potentially due to sensor or actuator failure, notifying supervisor."
+        },
+        {
+            "test_point_Nr.": 21,
+            "type": "Time out",
+            "content": "\n[22:04:28] TF81 reads information from the workpiece. The RFID tag on the workpiece is authorized.\n[22:04:38] Inactivity timeout.\n",
+            "command": "alert_to_supervisor('timeout')",
+            "reason": "No activity for a duration, potentially due to sensor or actuator failure, notifying supervisor."
+        },
+        {
+            "test_point_Nr.": 22,
+            "type": "Actuator Failure",
+            "content": "\n[22:04:35] BG21 detects a workpiece at stopper S1 on conveyor C2.\n[22:04:36] Island I calls function: S1_release(), C4_run('forward', 8)\n[22:04:36] stopper S1 failed to be released.\n",
+            "command": "alert_to_supervisor('Stopper S1 failure')",
+            "reason": "Stopper S1 failed to be released; requires human intervention."
+        },
+        {
+            "test_point_Nr.": 23,
+            "type": "Sensor Malfunctions",
+            "content": "\n[22:04:35] BG21 detects a workpiece at stopper S1 on conveyor C2.\n[22:04:36] Island I calls function: S1_release(), C4_run('forward', 8)\n[22:04:36] BG20 failed to detect the status of Stopper S1.\n",
+            "command": "alert_to_supervisor('BG20 malfunction')",
+            "reason": "BG20 failed to detect the status of Stopper S1."
+        },
+        {
+            "test_point_Nr.": 24,
+            "type": "Actuator Failure",
+            "content": "\n[22:04:35] BG21 detects a workpiece at stopper S1 on conveyor C2.\n[22:04:36] Island I calls function: S1_release(), C4_run('forward', 8)\n[22:04:36] conveyor C4 failed to be moved.\n",
+            "command": "alert_to_supervisor('conveyor C4 failure')",
+            "reason": "conveyor C4 failed to be moved; requires human intervention."
+        }
+    ],
+    "Island II": [
+        {
+            "test_point_Nr.": 1,
+            "type": "SOP",
+            "content": "\n[00:00:01] Robotino has docked with 'Island II'.\n",
+            "command": "C3_run('forward', 8), branch_divert()",
+            "reason": "Robotino has docked, moving workpieces towards the CNC station."
+        },
+        {
+            "test_point_Nr.": 2,
+            "type": "SOP",
+            "content": "\n[00:00:03] Robotino unloads the workpiece.\n[00:00:04] BG41 detects a workpiece at stopper S3 on conveyor C3.\n[00:00:04] Branch is already set to divert the workpieces.\n",
+            "command": "S3_release(), C2_run('forward', 8)",
+            "reason": "BG41 detected a workpiece at S3 and the branch is set to divert. This will move the workpiece forward on C2."
+        },
+        {
+            "test_point_Nr.": 3,
+            "type": "SOP",
+            "content": "\n[00:00:03] Robotino unloads the workpiece.\n[00:00:04] BG41 detects a workpiece at stopper S3 on conveyor C3.\n[00:00:04] BG45 detects a workpiece, indicating that the sub-section is jammed.\n",
+            "command": "no_action()",
+            "reason": "Waiting for the jammed workpiece to clear before releasing the stopper S3."
+        },
+        {
+            "test_point_Nr.": 4,
+            "type": "SOP",
+            "content": "\n[00:00:03] Robotino unloads the workpiece.\n[00:00:04] BG41 detects a workpiece at stopper S3 on conveyor C3.\n[00:00:04] BG45 detects a workpiece, indicating that the sub-section is jammed.\n[00:00:09] A workpiece passes BG45.",
+            "command": "S3_release(), C2_run('forward', 8)",
+            "reason": "The sub-section is no longer jammed, so the workpiece at S3 can proceed."
+        },
+        {
+            "test_point_Nr.": 5,
+            "type": "SOP",
+            "content": "\n[00:00:18] BG27 detects a workpiece at the outlet of the conveyor C2.\n",
+            "command": "C2_run('forward', 2)",
+            "reason": "Move workpiece from the outlet of conveyor C2."
+        },
+        {
+            "test_point_Nr.": 6,
+            "type": "SOP",
+            "content": "\n[00:00:21] BG56 detects a workpiece at the infeed of conveyor C1.\n",
+            "command": "C1_run('forward',13)",
+            "reason": "Move workpiece through conveyor C1 from infeed."
+        },
+        {
+            "test_point_Nr.": 7,
+            "type": "SOP",
+            "content": "\n[00:00:29] TF81 reads information from the workpiece. Information for machining process is retrieved: [{\"material\": 'Aluminum'},{\"tool_id\": 'drill'}, {\"spindle_rpm\": 1500}, {\"cutting_depth\": 1.2}, {\"cutting_length\": 15}].\n[00:00:30] BG51 detects a workpiece at stopper S2 on conveyor C1, indicating that the workpiece arrives at the CNC station.\n",
+            "command": "load_workpiece()",
+            "reason": "Workpiece has arrived at the CNC station."
+        },
+        {
+            "test_point_Nr.": 8,
+            "type": "SOP",
+            "content": "\n[00:00:29] TF81 reads information from the workpiece. Information for machining process is retrieved: [{\"material\": 'Aluminum'},{\"tool_id\": 'drill'}, {\"spindle_rpm\": 1500}, {\"cutting_depth\": 1.2}, {\"cutting_length\": 15}].\n[00:00:30] BG51 detects a workpiece at stopper S2 on conveyor C1, indicating that the workpiece arrives at the CNC station.\n[00:00:31] 'Island II' calls function load_workpiece().\n[00:00:32] the workpiece is loaded into CNC machine.\n",
+            "command": "choose_tool('drill')",
+            "reason": "Prepare the selected tool for the machining process."
+        },
+        {
+            "test_point_Nr.": 9,
+            "type": "SOP",
+            "content": "\n[00:00:29] TF81 reads information from the workpiece. Information for machining process is retrieved: [{\"material\": 'Aluminum'},{\"tool_id\": 'drill'}, {\"spindle_rpm\": 1500}, {\"cutting_depth\": 1.2}, {\"cutting_length\": 15}].\n[00:00:30] BG51 detects a workpiece at stopper S2 on conveyor C1, indicating that the workpiece arrives at the CNC station.\n[00:00:31] 'Island II' calls function load_workpiece().\n[00:00:32] the workpiece is loaded into CNC machine.\n[00:00:31] 'Island II' calls function choose_tool('drill').\n[00:00:34] PG51 detects the tool at initial position.\n",
+            "command": "start_spindle(1500), apply_coolant('pulsed')",
+            "reason": "Tool is in initial position, ready to start spindle and apply coolant."
+        },
+        {
+            "test_point_Nr.": 10,
+            "type": "SOP",
+            "content": "\n[00:00:29] TF81 reads information from the workpiece. Information for machining process is retrieved: [{\"material\": 'Aluminum'},{\"tool_id\": 'drill'}, {\"spindle_rpm\": 1500}, {\"cutting_depth\": 1.2}, {\"cutting_length\": 15}].\n[00:00:30] BG51 detects a workpiece at stopper S2 on conveyor C1, indicating that the workpiece arrives at the CNC station.\n[00:00:31] 'Island II' calls function load_workpiece().\n[00:00:32] the workpiece is loaded into CNC machine.\n[00:00:31] 'Island II' calls function choose_tool('drill').\n[00:00:34] PG51 detects the tool at initial position.\n[00:00:35] 'Island II' calls function start_spindle(1500), apply_coolant('pulsed').\n[00:00:36] PG52 detects the correct placement of the workpiece.\n",
+            "command": "start_cutting(1.2, 15)",
+            "reason": "Start the cutting process with specified parameters as the workpiece is correctly placed."
+        },
+        {
+            "test_point_Nr.": 11,
+            "type": "SOP",
+            "content": "\n[00:05:51] CNC processing is finished.\n",
+            "command": "stop_series()",
+            "reason": "The CNC processing is finished, so it's time to stop the spindle rotation, coolant application, and cutting process."
+        },
+        {
+            "test_point_Nr.": 12,
+            "type": "SOP",
+            "content": "\n[00:05:55] the machine is stopped.\n",
+            "command": "unload_workpiece()",
+            "reason": "Machine processing finished, unloading workpiece."
+        },
+        {
+            "test_point_Nr.": 13,
+            "type": "SOP",
+            "content": "\n[00:05:56] the workpiece is unloaded out of CNC machine.\n",
+            "command": "S2_release(), C1_run('forward', 8), robot_request('Island_II', 'in')",
+            "reason": "Workpiece has been unloaded, move it forward and request Robotino for transport."
+        },
+        {
+            "test_point_Nr.": 14,
+            "type": "Sensor Malfunction",
+            "content": "\n[00:06:06] PG54 failed to read the temperature.\n",
+            "command": "alert_to_supervisor('PG54 sensor failure')",
+            "reason": "PG54 sensor failed to read the temperature."
+        },
+        {
+            "test_point_Nr.": 15,
+            "type": "Actuator Failure",
+            "content": "\n[00:00:32] PG52 detects the correct placement of the workpiece.\n[00:00:34] 'Island II' calls function choose_tool('drill').\n[00:00:35] Failed to change tools.\n",
+            "command": "alert_to_supervisor('Failed to change tools')",
+            "reason": "Tool change failed, need to replace the tool."
+        },
+        {
+            "test_point_Nr.": 16,
+            "type": "Actuator Failure",
+            "content": "\n[00:05:51] CNC processing is finished.\n[00:05:51] 'Island II' calls function unload_workpiece().\n[00:05:52] Failed to unload the workpiece.\n",
+            "command": "alert_to_supervisor('Failed to unload workpiece')",
+            "reason": "Unloading of the workpiece failed, supervisor intervention required."
+        },
+        {
+            "test_point_Nr.": 17,
+            "type": "Unexpected Events",
+            "content": "\n[11:48:45] TF81 reads information from the workpiece. Information for machining process is retrieved: [{\"material\": \"titanium\" }, {\"tool_id\": \"drill\"}, {\"spindle_rpm\": int}, {\"cutting_depth\": float}, {\"cutting_length\": float}].\n[11:48:48] BG51 detects a workpiece at stopper S2 on conveyor C1, indicating that the workpiece arrives at the CNC station.\n[11:48:50] Island II calls function: load_workpiece().\n[11:48:52] The workpiece is loaded into CNC machine.\n[11:48:56] Island II calls function: choose_tool('drill').\n[11:48:58] PG51 detects the tool at initial position.\n[11:49:00] Island II calls function: start_spindle(1200), apply_coolant('pulsed').\n[11:49:02] The spindle starts to rotate.\n[11:49:02] The coolant is applied.\n[11:49:04] PG52 detects the correct placement of the workpiece.\n[11:49:05] Island II calls function: start_cutting(1.0, 12).\n[11:50:05] PG54 reads temperature 50°C.\n",
+            "command": "apply_coolant('continuous')",
+            "reason": "Temperature exceeding 45°C for titanium; switching coolant to 'continuous' mode."
+        },
+        {
+            "test_point_Nr.": 18,
+            "type": "Unexpected Events",
+            "content": "\n[11:48:45] TF81 reads information from the workpiece. Information for machining process is retrieved: [{\"material\": \"aluminium\" }, {\"tool_id\": \"drill\"}, {\"spindle_rpm\": int}, {\"cutting_depth\": float}, {\"cutting_length\": float}].\n[11:48:48] BG51 detects a workpiece at stopper S2 on conveyor C1, indicating that the workpiece arrives at the CNC station.\n[11:48:50] Island II calls function: load_workpiece().\n[11:48:52] The workpiece is loaded into CNC machine.\n[11:48:56] Island II calls function: choose_tool('drill').\n[11:48:58] PG51 detects the tool at initial position.\n[11:49:00] Island II calls function: start_spindle(1200), apply_coolant('pulsed').\n[11:49:02] The spindle starts to rotate.\n[11:49:02] The coolant is applied.\n[11:49:04] PG52 detects the correct placement of the workpiece.\n[11:49:05] Island II calls function: start_cutting(1.0, 12).\n[11:50:05] PG54 reads temperature 50°C.\n",
+            "command": "no_action()",
+            "reason": "Temperature not exceeding 55°C for aluminium; no need to switch to mode 'continuous'."
+        },
+        {
+            "test_point_Nr.": 19,
+            "type": "Unexpected Events",
+            "content": "\n[00:30:40] the workpiece unloaded out of CNC machine.\n[00:30:41] 'Island II' calls function S2_release(), C1_run('forward', 8), robot_request('Island II', 'in')\n[00:30:42] Communication failure with Robotino.\n",
+            "command": "manager_request(), alert_to_supervisor('Communication failure with Robotino')",
+            "reason": "Communication failure with Robotino, requesting an updated plan and notifying supervisor."
+        },
+        {
+            "test_point_Nr.": 20,
+            "type": "Unexpected Events",
+            "content": "\n[00:06:06] PG53 detects excessive tool wear.\n",
+            "command": "replace_tool()",
+            "reason": "Excessive tool wear detected, tool replacement needed."
+        },
+        {
+            "test_point_Nr.": 21,
+            "type": "Time out",
+            "content": "\n[22:05:07] BG56 detects a workpiece at the infeed of conveyor C1.\n[22:05:07] Island II calls function: C1_run('forward', 13).\n[22:05:17] Inactivity timeout.\n",
+            "command": "alert_to_supervisor('timeout')",
+            "reason": "No activity for a duration, potentially due to sensor or actuator failure, notifying supervisor."
+        },
+        {
+            "test_point_Nr.": 22,
+            "type": "SOP",
+            "content": "\n[22:05:48] BG21 detects a workpiece at stopper S1 on conveyor C2.\n[22:05:49] Island II calls function: S1_release(), C4_run('forward', 8)\n[22:05:49] stopper S1 is released.\n[22:05:50] A workpiece passes BG21.\n[22:05:51] stopper S1 is raised.\n[22:05:54] BG42 detects a workpiece at the infeed of conveyor C4.\n",
+            "command": "C4_stop()",
+            "reason": "workpiece will stop at BG42, awaiting Robotino docking "
+        },
+        {
+            "test_point_Nr.": 23,
+            "type": "Actuator Failure",
+            "content": "\n[00:01:09] BG51 detects a workpiece at stopper S2 on conveyor C1.\n[00:01:09] A workpiece passes BG51.\n",
+            "command": "alert_to_supervisor('stopper S2 failure')",
+            "reason": "A workpiece passes BG51 before function S2_release() is called."
+        },
+        {
+            "test_point_Nr.": 24,
+            "type": "Unexpected Events",
+            "content": "\n[22:04:59] Island II calls function: C3_run('forward', 8), branch_divert().\n[22:05:01] Robotino unloads the workpiece.\n[22:05:01] BG41 detects a workpiece at stopper S3.\n[22:05:02] Branch is already set to divert the workpieces.\n[22:05:03] Island II calls function: S3_release(), C2_run('forward', 8).\n[22:05:03] stopper S3 is realeased.\n[22:05:05] A workpiece passes BG41.\n[22:05:06] stopper S3 is raised.\n[22:05:07] Branch is already set to direct the workpieces straight.\n",
+            "command": "branch_divert()",
+            "reason": "To redirect processed workpieces to Dock."
+        }
+    ],
+    "Island III": [
+        {
+            "test_point_Nr.": 1,
+            "type": "SOP",
+            "content": "\n[00:00:01] Robotino has docked with 'Island III'.\n",
+            "command": "C3_run('forward', 8), branch_divert()",
+            "reason": "Move conveyor C3 forward since Robotino has docked with the island and divert the branch for later Robotino transport."
+        },
+        {
+            "test_point_Nr.": 2,
+            "type": "SOP",
+            "content": "\n[00:00:03] Robotino unloads the workpiece.\n[00:00:04] BG41 detects a workpiece at stopper S3 on conveyor C3.\n[00:00:04] Branch is already set to divert the workpieces.\n",
+            "command": "S3_release(), C2_run('forward', 8)",
+            "reason": "Move the workpiece forward. first release stopper S3, then move conveyor C2."
+        },
+        {
+            "test_point_Nr.": 3,
+            "type": "SOP",
+            "content": "\n[00:00:03] Robotino unloads the workpiece.\n[00:00:04] BG41 detects a workpiece at stopper S3 on conveyor C3.\n[00:00:04] BG45 detects a workpiece, indicating that the sub-section is jammed.\n",
+            "command": "no_action()",
+            "reason": "Workpiece will wait at stopper S3 due to jam in sub-section detected by BG45."
+        },
+        {
+            "test_point_Nr.": 4,
+            "type": "SOP",
+            "content": "\n[00:00:03] Robotino unloads the workpiece.\n[00:00:04] BG41 detects a workpiece at stopper S3 on conveyor C3.\n[00:00:04] BG45 detects a workpiece, indicating that the sub-section is jammed.\n[00:00:09] A workpiece passes BG45.",
+            "command": "S3_release(), C2_run('forward', 8)",
+            "reason": "The sub-section is not jammed anymore; releasing the workpiece at stopper S3 and move conveyor C2 forward."
+        },
+        {
+            "test_point_Nr.": 5,
+            "type": "SOP",
+            "content": "\n[00:00:21] BG56 detects a workpiece at the infeed of conveyor C1.\n",
+            "command": "C1_run('forward',13)",
+            "reason": "Move workpiece forward on conveyor C1."
+        },
+        {
+            "test_point_Nr.": 6,
+            "type": "SOP",
+            "content": "\n[00:00:30] BG51 detects a workpiece at stopper S2 on conveyor C1, indicating that the workpiece arrives at the painting station.\n",
+            "command": "load_workpiece()",
+            "reason": "The workpiece has arrived at the painting station and needs to be loaded."
+        },
+        {
+            "test_point_Nr.": 7,
+            "type": "SOP",
+            "content": "\n[12:16:47] TF81 reads information from the workpiece. Information for processing is retrieved: [{'color': 'Red'}, {'mode': 'triangle'}].\n[12:16:49] BG51 detects a workpiece at stopper S2 on conveyor C1, indicating that the workpiece arrives at the painting station.\n[12:16:50] Island III calls function: load_workpiece().\n[12:16:52] PG60 detects a workpiece in position.\n",
+            "command": "start_painting('red', 'triangle')",
+            "reason": "Begin the painting process as the workpiece is in the correct placement."
+        },
+        {
+            "test_point_Nr.": 8,
+            "type": "SOP",
+            "content": "\n[00:05:51] Painting processing is complete.\n",
+            "command": "dry_workpiece()",
+            "reason": "Initialize the drying process after painting is complete."
+        },
+        {
+            "test_point_Nr.": 9,
+            "type": "SOP",
+            "content": "\n[00:15:51] Drying processing is complete.\n",
+            "command": "unload_workpiece()",
+            "reason": "Drying process is complete, ready to unload workpiece."
+        },
+        {
+            "test_point_Nr.": 10,
+            "type": "SOP",
+            "content": "\n[00:15:51] Drying processing is complete.\n[00:15:51] 'Island III' calls function unload_workpiece()\n[00:15:51] the workpiece is unloaded out of the paiting station.\n",
+            "command": "S2_release(), C1_run('forward', 8), robot_request('Island_III', 'in')",
+            "reason": "Workpiece has been unloaded, move it forward and request Robotino for transport."
+        },
+        {
+            "test_point_Nr.": 11,
+            "type": "SOP",
+            "content": "\n[00:50:44] BG26 detects the workpiece at the infeed of conveyor C2\n",
+            "command": "C2_run('forward',13)",
+            "reason": "Move workpiece forward on conveyor C2."
+        },
+        {
+            "test_point_Nr.": 12,
+            "type": "SOP",
+            "content": "\n[00:02:44] Branch is already set to divert the workpieces.\n[00:50:48] BG21 detects workpieces at stopper S1.\n",
+            "command": "S1_release(), C4_run('forward', 8)",
+            "reason": "BG21 detected workpieces at stopper S1 and the branch is already set to divert the workpieces, allow the workpiece to move forward."
+        },
+        {
+            "test_point_Nr.": 13,
+            "type": "Sensor Malfunctions",
+            "content": "\n[00:01:06] PG63 failed to detect the temperature.\n",
+            "command": "alert_to_supervisor('temperature sensor failure')",
+            "reason": "PG63 failed to detect the temperature and need to  notify the supervisor."
+        },
+        {
+            "test_point_Nr.": 14,
+            "type": "Actuator Failure",
+            "content": "\n[00:00:35] 'Island III' calls function start_painting(color: string, mode: string).\n[00:00:35] Failed to initiate painting.\n",
+            "command": "alert_to_supervisor('painting failure')",
+            "reason": "Painting initiation failed. Supervisor should be alerted for immediate action."
+        },
+        {
+            "test_point_Nr.": 15,
+            "type": "Actuator Failure",
+            "content": "\n[00:30:37] 'Island III' calls function dry_workpiece().\n[00:00:29] Failed to initiate drying.\n",
+            "command": "alert_to_supervisor('Failed to initiate drying')",
+            "reason": "Notify supervisor of drying process failure."
+        },
+        {
+            "test_point_Nr.": 16,
+            "type": "Unexpected Events",
+            "content": "\n[00:00:35] 'Island III' calls function start_painting( \"coat\", \"yellow\").\n",
+            "command": "alert_to_supervisor('Mismatched parameters in function calling')",
+            "reason": "The parameters passed to the function are not matched according to SOP and need to notify the supervisor."
+        },
+        {
+            "test_point_Nr.": 17,
+            "type": "Unexpected Events",
+            "content": "\n[00:05:00] PG61 detects paint consistency issue.\n",
+            "command": "alert_to_supervisor('painting failure')",
+            "reason": "PG61 detected paint consistency issue, alerting supervisor to address the painting failure."
+        },
+        {
+            "test_point_Nr.": 18,
+            "type": "Unexpected Events",
+            "content": "\n[00:00:07] PG63 detects temperature 35 degrees.\n",
+            "command": "cooling()",
+            "reason": "Temperature is above threshold; initiating cooling."
+        },
+        {
+            "test_point_Nr.": 19,
+            "type": "Unexpected Events",
+            "content": "\n[00:00:36] PG64 detects paint level lower than 20%.\n",
+            "command": "paint_request()",
+            "reason": "Paint level is lower than 20%."
+        },
+        {
+            "test_point_Nr.": 20,
+            "type": "Unexpected Events",
+            "content": "\n[00:00:36] PG62 detects humidity 80%.\n",
+            "command": "lower_humidity()",
+            "reason": "Humidity is over 65%, need to lower it."
+        },
+        {
+            "test_point_Nr.": 21,
+            "type": "Time out",
+            "content": "\n[22:05:07] BG56 detects a workpiece at the infeed of conveyor C1.\n[22:05:07] Island III calls function: C1_run('forward', 13).\n[22:05:17] Inactivity timeout.\n",
+            "command": "alert_to_supervisor('timeout')",
+            "reason": "No activity for a duration, potentially due to sensor or actuator failure, notifying supervisor."
+        },
+        {
+            "test_point_Nr.": 22,
+            "type": "SOP",
+            "content": "\n[22:05:48] BG21 detects a workpiece at stopper S1 on conveyor C2.\n[22:05:49] Island III calls function: S1_release(), C4_run('forward', 8).\n[22:05:49] stopper S1 is released.\n[22:05:50] A workpiece passes BG21.\n[22:05:51] stopper S1 is raised.\n[22:05:54] BG42 detects a workpiece at the infeed of conveyor C4.\n",
+            "command": "C4_stop()",
+            "reason": "workpiece will stop at BG42, awaiting Robotino docking "
+        },
+        {
+            "test_point_Nr.": 23,
+            "type": "Actuator Failure",
+            "content": "\n[00:01:09] BG51 detects a workpiece at stopper S2 on conveyor C1.\n[00:01:09] A workpiece passes BG51.\n",
+            "command": "alert_to_supervisor('stopper S2 failure')",
+            "reason": "A workpiece passes BG51 before function S2_release() is called."
+        },
+        {
+            "test_point_Nr.": 24,
+            "type": "Unexpected Events",
+            "content": "\n[22:04:59] Island III calls function: C3_run('forward', 8), branch_divert().\n[22:05:01] Robotino unloads the workpiece.\n[22:05:01] BG41 detects a workpiece at stopper S3.\n[22:05:02] Branch is already set to divert the workpieces.\n[22:05:03] Island III calls function: S3_release(), C2_run('forward', 8).\n[22:05:03] stopper S3 is realeased.\n[22:05:05] A workpiece passes BG41.\n[22:05:06] stopper S3 is raised.\n[22:05:07] Branch is already set to direct the workpieces straight.\n",
+            "command": "branch_divert()",
+            "reason": "To redirect processed workpieces to Dock."
+        }
+    ],
+    "Robotino": [
+        {
+            "test_point_Nr.": 1,
+            "type": "SOP",
+            "content": "\n[22:04:29] PG73 recieves request from Island I to transport workpieces.\n",
+            "command": "navigate_to('Island I','in')",
+            "reason": "Recieved a request from 'Island I' to transport workpieces and needs to navigate to 'Island I'."
+        },
+        {
+            "test_point_Nr.": 2,
+            "type": "SOP",
+            "content": "\n[22:04:29] PG73 recieves request from Island I to transport workpieces.\n[22:04:30] Robotino calls function: navigate_to('Island I', 'in')\n[22:04:42] Robotino has docked with Island I.\n",
+            "command": "load_workpiece()",
+            "reason": "Robotino has docked and needs to transport the workpiece from Island I, ready to load the workpiece into Robotino."
+        },
+        {
+            "test_point_Nr.": 3,
+            "type": "SOP",
+            "content": "\n[22:04:45] PG71 confirms that the workpiece is securely loaded.\n",
+            "command": "read_info()",
+            "reason": "To get the next destination for the loaded workpiece when the workpiece is securely loaded."
+        },
+        {
+            "test_point_Nr.": 4,
+            "type": "SOP",
+            "content": "\n[22:04:46] The next destination is retrieved: Island II.\n",
+            "command": "navigate_to('Island II', 'out')",
+            "reason": "Navigating to Island II to deliver the workpiece."
+        },
+        {
+            "test_point_Nr.": 5,
+            "type": "SOP",
+            "content": "\n[22:04:46] The next destination is retrieved: Island II.\n[22:04:46] Robotino calls function: navigate_to('Island II', 'out')\n[22:04:58] Robotino has docked with Island II.\n",
+            "command": "unload_workpiece()",
+            "reason": "Robotino has docked and needs to deliver the workpiece to Island II, ready to unload the workpiece."
+        },
+        {
+            "test_point_Nr.": 6,
+            "type": "SOP",
+            "content": "\n[00:11:43] The workpiece is unloaded.\n",
+            "command": "navigate_to('base', None)",
+            "reason": "Returning to the base after unloading the workpiece."
+        },
+        {
+            "test_point_Nr.": 7,
+            "type": "SOP",
+            "content": "\n[22:05:44] PG73 recieves request from Island II to transport workpieces.\n",
+            "command": "navigate_to('Island II', 'in')",
+            "reason": "Recieved a request from 'Island II' to transport workpieces and needs to navigate to 'Island II'."
+        },
+        {
+            "test_point_Nr.": 8,
+            "type": "SOP",
+            "content": "\n[22:05:44] PG73 recieves request from Island II to transport workpieces.\n[22:05:45] Robotino calls function: navigate_to('Island II', 'in').\n[22:05:57] Robotino has docked with Island II.\n",
+            "command": "load_workpiece()",
+            "reason": "Robotino has docked and needs to transport the workpiece from Island II, ready to load the workpiece into Robotino."
+        },
+        {
+            "test_point_Nr.": 9,
+            "type": "SOP",
+            "content": "\n[22:06:00] The next destination is retrieved: Island III.\n",
+            "command": "navigate_to('Island III', 'out')",
+            "reason": "Navigating to Island III to deliver the workpiece."
+        },
+        {
+            "test_point_Nr.": 10,
+            "type": "SOP",
+            "content": "\n[22:04:46] The next destination is retrieved: Island III.\n[22:04:46] Robotino calls function: navigate_to('Island III', 'out').\n[22:04:58] Robotino has docked with Island III.\n",
+            "command": "unload_workpiece()",
+            "reason": "Robotino has docked and needs to deliver the workpiece to Island III, ready to unload the workpiece."
+        },
+        {
+            "test_point_Nr.": 11,
+            "type": "SOP",
+            "content": "\n[22:05:44] PG73 recieves request from Island III to transport workpieces.\n",
+            "command": "navigate_to('Island III', 'in')",
+            "reason": "Recieved a request from 'Island III' to transport workpieces and needs to navigate to 'Island III'."
+        },
+        {
+            "test_point_Nr.": 12,
+            "type": "SOP",
+            "content": "\n[22:06:55] PG73 recieves request from Island III to transport workpieces.\n[22:06:56] Robotino calls function: navigate_to('Island III', 'in').\n[22:07:08] Robotino has docked with Island III.\n",
+            "command": "load_workpiece()",
+            "reason": "Robotino has docked and needs to transport the workpiece from Island III, ready to load the workpiece into Robotino."
+        },
+        {
+            "test_point_Nr.": 13,
+            "type": "SOP",
+            "content": "\n[22:07:12] The next destination is retrieved: Dispatching Zone.\n",
+            "command": "navigate_to('Dispatching Zone', 'out')",
+            "reason": "Navigating to Dispatching Zone to deliver the workpiece."
+        },
+        {
+            "test_point_Nr.": 14,
+            "type": "SOP",
+            "content": "\n[22:07:12] The next destination is retrieved: Dispatching Zone.\n[22:07:12] Robotino calls function: navigate_to('Dispatching Zone', 'out').\n[22:07:24] Robotino has docked with Dispatching Zone.\n",
+            "command": "unload_workpiece()",
+            "reason": "Robotino has docked and needs to deliver the workpiece to Dispatching Zone, ready to unload the workpiece."
+        },
+        {
+            "test_point_Nr.": 15,
+            "type": "SOP",
+            "content": "\n[22:05:14] Robotino has docked with base.\n",
+            "command": "no_action()",
+            "reason": "The transport procedure ends when Robotino returns to base, no action is needed."
+        },
+        {
+            "test_point_Nr.": 16,
+            "type": "Unexpected Events",
+            "content": "\n[00:05:30] PG72 detects Battery level below 10%.\n",
+            "command": "return_to_charge()",
+            "reason": "Battery level below 10%."
+        },
+        {
+            "test_point_Nr.": 17,
+            "type": "Unexpected Events",
+            "content": "\n[00:06:30] PG73 lost communication with 'Island I'.\n",
+            "command": "alert_to_supervisor('Communication error with Island I')",
+            "reason": "Lost communication with Island I."
+        },
+        {
+            "test_point_Nr.": 18,
+            "type": "Unexpected Events",
+            "content": "\n[22:06:17] Robotino calls function: navigate_to('base', None).\n[22:06:25] PG70 detects Obstruction on path.\n",
+            "command": "emergency_stop()",
+            "reason": "Obstruction detected on path."
+        },
+        {
+            "test_point_Nr.": 19,
+            "type": "Unexpected Events",
+            "content": "\n[22:05:45] Robotino calls function: navigate_to('Island II', 'in').\n[22:05:58] PG70 detects Obstruction on path.\n",
+            "command": "emergency_stop()",
+            "reason": "Obstruction detected on path."
+        },
+        {
+            "test_point_Nr.": 20,
+            "type": "Unexpected Events",
+            "content": "\n[00:00:30] Docking error.\n",
+            "command": "alert_to_supervisor('Docking error')",
+            "reason": "Unable to dock with the island; supervisor alert needed."
+        },
+        {
+            "test_point_Nr.": 21,
+            "type": "Timeout",
+            "content": "\n[00:06:30] Robotino calls function navigate_to('Island III', 'out').\n[00:07:30] Inactivity Timeout.\n",
+            "command": "alert_to_supervisor('timeout')",
+            "reason": "No activity detected - possible sensor or actuator failure."
+        },
+        {
+            "test_point_Nr.": 22,
+            "type": "Timeout",
+            "content": "\n[00:06:55] Island I calls function robot_request('Island I'\"').\n[00:08:55] Inactivity Timeout.\n",
+            "command": "alert_to_supervisor('timeout')",
+            "reason": "No activity detected - possible sensor or actuator failure."
+        },
+        {
+            "test_point_Nr.": 23,
+            "type": "Unexpected Events",
+            "content": "\n[00:03:22] The next destination is: Island III.\n[00:03:23] Robotino calls function navigate_to('Island III', 'out').\n[00:04:24] PG71 confirms no workpiece is securely loaded.\n",
+            "command": "alert_to_supervisor('No workpiece loaded')",
+            "reason": "PG71 confirms no workpiece is loaded."
+        },
+        {
+            "test_point_Nr.": 24,
+            "type": "Unexpected Events",
+            "content": "\n[00:04:20] PG71 confirms the workpiece is securely loaded\n[00:04:21] Robotino calls function read_info().\n[00:04:22] Unrecognized workpiece loaded.\n",
+            "command": "alert_to_supervisor('Unrecognized workpiece loaded')",
+            "reason": "The workpiece is not recognized, need supervisor intervention."
+        }
+    ],
+    "Manager": [
+        {
+            "test_point_Nr.": 1,
+            "type": "Order",
+            "content": "\nOrder ID: 001\nMaterial: Aluminum\nProcessing: Milling\nSpindle_rpm: 1200\nCutting_depth: 1.0\nCutting_length: 12\nPaint color: Red\nPaint mode: triangle\n",
+            "plan": "{\n  \"Order ID\": \"001\",\n  \"Production Steps\": [\n    {\n      \"Step\": 1,\n      \"Description\": \"Dispatching workpieces from Storage Station\",\n      \"Agent\": \"Island I\",\n      \"Details\": [],\n      \"Duration\": \"15 minutes\"\n    },\n    {\n      \"Step\": 2,\n      \"Description\": \"Navigate from Island I to Island II\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island I\"}, {\"To\": \"Island II\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 3,\n      \"Description\": \"Milling process\",\n      \"Agent\": \"Island II\",\n      \"Details\": [{\"material\": \"Aluminum\"}, {\"processing\": \"Milling\"}, {\"spindle_rpm\": 1200}, {\"cutting_depth\": 1.0}, {\"cutting_length\": 12}],\n      \"Duration\": \"30 minutes\"\n    },\n    {\n      \"Step\": 4,\n      \"Description\": \"Navigate from Island II to Island III\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island II\"}, {\"To\": \"Island III\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 5,\n      \"Description\": \"Painting\",\n      \"Agent\": \"Island III\",\n      \"Details\": [{\"color\": \"Red\"}, {\"mode\": \"triangle\"}],\n      \"Duration\": \"1 hour\"\n    },\n    {\n      \"Step\": 6,\n      \"Description\": \"Navigate from Island III to Dispatching Zone\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island III\"}, {\"To\": \"Dispatching Zone\"}],\n      \"Duration\": \"5 minutes\"\n    }\n  ],\n  \"Estimated Total Duration\": \"2 hours\"\n}"
+        },
+        {
+            "test_point_Nr.": 2,
+            "type": "Order",
+            "content": "\nOrder ID: 002\nMaterial: Steel\nProcessing: Drilling\nSpindle_rpm: 1300\nCutting_depth: 1.2\nCutting_length: 13\n",
+            "plan": "{\n  \"Order ID\": \"002\",\n  \"Production Steps\": [\n    {\n      \"Step\": 1,\n      \"Description\": \"Dispatching workpieces from Storage Station\",\n      \"Agent\": \"Island I\",\n      \"Details\": [],\n      \"Duration\": \"15 minutes\"\n    },\n    {\n      \"Step\": 2,\n      \"Description\": \"navigate from Island I to Island II\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island I\"}, {\"To\": \"Island II\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 3,\n      \"Description\": \"Drilling process\",\n      \"Agent\": \"Island II\",\n      \"Details\": [{\"material\": \"Steel\"}, {\"processing\": \"Drilling\"}, {\"spindle_rpm\": 1300}, {\"cutting_depth\": 1.2}, {\"cutting_length\": 13}],\n      \"Duration\": \"30 minutes\"\n    },\n    {\n      \"Step\": 4,\n      \"Description\": \"navigate from Island II to Dispatching Zone\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island II\"}, {\"To\": \"Dispatching Zone\"}],\n      \"Duration\": \"5 minutes\"\n    }\n  ],\n  \"Estimated Total Duration\": \"55 minutes\"\n}"
+        },
+        {
+            "test_point_Nr.": 3,
+            "type": "Order",
+            "content": "\nOrder ID: 003\nMaterial: Copper\nPaint Color: Green\nPaint mode: coat\n",
+            "plan": "{\n  \"Order ID\": \"003\",\n  \"Production Steps\": [\n    {\n      \"Step\": 1,\n      \"Description\": \"Dispatching workpieces from Storage Station\",\n      \"Agent\": \"Island I\",\n      \"Details\": [],\n      \"Duration\": \"15 minutes\"\n    },\n    {\n      \"Step\": 2,\n      \"Description\": \"Navigate from Island I to Island III\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island I\"}, {\"To\": \"Island III\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 3,\n      \"Description\": \"Painting\",\n      \"Agent\": \"Island III\",\n      \"Details\": [{\"color\": \"green\"}, {\"mode\": \"coat\"}],\n      \"Duration\": \"1 hour\"\n    },\n    {\n      \"Step\": 4,\n      \"Description\": \"Navigate from Island III to Dispatching Zone\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island III\"}, {\"To\": \"Dispatching Zone\"}],\n      \"Duration\": \"5 minutes\"\n    }    \n  ],\n  \"Estimated Total Duration\": \"1 hour 25 minutes\"\n}"
+        },
+        {
+            "test_point_Nr.": 4,
+            "type": "Order",
+            "content": "\nOrder ID: 004\nMaterial: Steel\nProcessing: Drilling\nSpindle_rpm: 1300\nCutting_depth: 1.4\nCutting_length: 15\nPaint Color: Black\nPaint mode: rectangle\n",
+            "plan": "{\n  \"Order ID\": \"004\",\n  \"Production Steps\": [\n    {\n      \"Step\": 1,\n      \"Description\": \"Dispatching workpieces from Storage Station\",\n      \"Agent\": \"Island I\",\n      \"Details\": [],\n      \"Duration\": \"15 minutes\"\n    },\n    {\n      \"Step\": 2,\n      \"Description\": \"Navigate from Island I to Island II\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island I\"}, {\"To\": \"Island II\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 3,\n      \"Description\": \"Drilling process\",\n      \"Agent\": \"Island II\",\n      \"Details\": [{\"material\": \"Steel\"}, {\"processing\": \"Drilling\"}, {\"spindle_rpm\": 1300}, {\"cutting_depth\": 1.4}, {\"cutting_length\": 15}],\n      \"Duration\": \"30 minutes\"\n    },\n    {\n      \"Step\": 4,\n      \"Description\": \"Navigate from Island II to Island III\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island II\"}, {\"To\": \"Island III\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 5,\n      \"Description\": \"Painting process\",\n      \"Agent\": \"Island III\",\n      \"Details\": [{\"color\": \"Black\"}, {\"mode\": \"rectangle\"}],\n      \"Duration\": \"60 minutes\"\n    },\n    {\n      \"Step\": 6,\n      \"Description\": \"Navigate from Island III to Dispatching Zone\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island III\"}, {\"To\": \"Dispatching Zone\"}],\n      \"Duration\": \"5 minutes\"\n    }\n  ],\n  \"Estimated Total Duration\": \"2 hours\"\n}"
+        },
+        {
+            "test_point_Nr.": 5,
+            "type": "Order",
+            "content": "\nOrder ID: 005\nMaterial: Titanium\nProcessing: Milling\nSpindle_rpm: 1300\nCutting_depth: 1.4\nCutting_length: 15\nPaint Color: Silver\nPaint mode: star\n",
+            "plan": "{\n  \"Order ID\": \"005\",\n  \"Production Steps\": [\n    {\n      \"Step\": 1,\n      \"Description\": \"Dispatching workpieces from Storage Station\",\n      \"Agent\": \"Island I\",\n      \"Details\": [],\n      \"Duration\": \"15 minutes\"\n    },\n    {\n      \"Step\": 2,\n      \"Description\": \"navigate from Island I to Island II\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island I\"}, {\"To\": \"Island II\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 3,\n      \"Description\": \"Milling process\",\n      \"Agent\": \"Island II\",\n      \"Details\": [\n        {\"material\": \"Titanium\"},\n        {\"processing\": \"Milling\"},\n        {\"spindle_rpm\": 1300},\n        {\"cutting_depth\": 1.4},\n        {\"cutting_length\": 15}\n      ],\n      \"Duration\": \"30 minutes\"\n    },\n    {\n      \"Step\": 4,\n      \"Description\": \"navigate from Island II to Island III\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island II\"}, {\"To\": \"Island III\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 5,\n      \"Description\": \"Painting\",\n      \"Agent\": \"Island III\",\n      \"Details\": [\n        {\"color\": \"Silver\"},\n        {\"mode\": \"star\"}\n      ],\n      \"Duration\": \"1 hour\"\n    },\n    {\n      \"Step\": 6,\n      \"Description\": \"navigate from Island III to Dispatching Zone\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island III\"}, {\"To\": \"Dispatching Zone\"}],\n      \"Duration\": \"5 minutes\"\n    }\n  ],\n  \"Estimated Total Duration\": \"2 hours\"\n}"
+        },
+        {
+            "test_point_Nr.": 6,
+            "type": "Order",
+            "content": "\nOrder ID: 006\nMaterial: Copper\nProcessing: Milling\nSpindle_rpm: 1500\nCutting_depth: 1.5\nCutting_length: 15\n",
+            "plan": "{\n  \"Order ID\": \"006\",\n  \"Production Steps\": [\n    {\n      \"Step\": 1,\n      \"Description\": \"Dispatching workpieces from Storage Station\",\n      \"Agent\": \"Island I\",\n      \"Details\": [],\n      \"Duration\": \"15 minutes\"\n    },\n    {\n      \"Step\": 2,\n      \"Description\": \"Navigate from Island I to Island II\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island I\"}, {\"To\": \"Island II\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 3,\n      \"Description\": \"Milling process\",\n      \"Agent\": \"Island II\",\n      \"Details\": [{\"material\": \"Copper\"}, {\"processing\": \"Milling\"}, {\"spindle_rpm\": 1500}, {\"cutting_depth\": 1.5}, {\"cutting_length\": 15}],\n      \"Duration\": \"30 minutes\"\n    },\n    {\n      \"Step\": 4,\n      \"Description\": \"Navigate from Island II to Dispatching Zone\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island II\"}, {\"To\": \"Dispatching Zone\"}],\n      \"Duration\": \"5 minutes\"\n    }    \n  ],\n  \"Estimated Total Duration\": \"55 minutes\"\n}"
+        },
+        {
+            "test_point_Nr.": 7,
+            "type": "Order",
+            "content": "\nOrder ID: 007\nMaterial: Steel\nPaint color: Yellow\nPaint mode: coat\n",
+            "plan": "{\n  \"Order ID\": \"007\",\n  \"Production Steps\": [\n    {\n      \"Step\": 1,\n      \"Description\": \"Dispatching from Storage Station\",\n      \"Agent\": \"Island I\",\n      \"Details\": [],\n      \"Duration\": \"15 minutes\"\n    },\n    {\n      \"Step\": 2,\n      \"Description\": \"Navigate to Island III\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island I\"}, {\"To\": \"Island III\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 3,\n      \"Description\": \"Painting\",\n      \"Agent\": \"Island III\",\n      \"Details\": [{\"color\": \"yellow\"}, {\"mode\": \"coat\"}],\n      \"Duration\": \"1 hour\"\n    },\n    {\n      \"Step\": 4,\n      \"Description\": \"Navigate to Dispatching Zone\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island III\"}, {\"To\": \"Dispatching Zone\"}],\n      \"Duration\": \"5 minutes\"\n    }\n  ],\n  \"Estimated Total Duration\": \"1 hour 25 minutes\"\n}"
+        },
+        {
+            "test_point_Nr.": 8,
+            "type": "Order",
+            "content": "\nOrder ID: 008\nMaterial: Aluminum\nProcessing: Drilling\nSpindle_rpm: 1000\nCutting_depth: 0.5\nCutting_length: 10\nPaint color: Green\nPaint mode: star\n",
+            "plan": "{\n  \"Order ID\": \"008\",\n  \"Production Steps\": [\n    {\n      \"Step\": 1,\n      \"Description\": \"Dispatching workpieces from Storage Station\",\n      \"Agent\": \"Island I\",\n      \"Details\": [],\n      \"Duration\": \"15 minutes\"\n    },\n    {\n      \"Step\": 2,\n      \"Description\": \"Navigate from Island I to Island II\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island I\"}, {\"To\": \"Island II\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 3,\n      \"Description\": \"Drilling process\",\n      \"Agent\": \"Island II\",\n      \"Details\": [{\"material\": \"Aluminum\"}, {\"processing\": \"Drilling\"}, {\"spindle_rpm\": 1000}, {\"cutting_depth\": 0.5}, {\"cutting_length\": 10}],\n      \"Duration\": \"30 minutes\"\n    },\n    {\n      \"Step\": 4,\n      \"Description\": \"Navigate from Island II to Island III\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island II\"}, {\"To\": \"Island III\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 5,\n      \"Description\": \"Painting process\",\n      \"Agent\": \"Island III\",\n      \"Details\": [{\"color\": \"Green\"}, {\"mode\": \"star\"}],\n      \"Duration\": \"1 hour\"\n    },\n    {\n      \"Step\": 6,\n      \"Description\": \"Navigate from Island III to Dispatching Zone\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island III\"}, {\"To\": \"Dispatching Zone\"}],\n      \"Duration\": \"5 minutes\"\n    }\n  ],\n  \"Estimated Total Duration\": \"2 hours\"\n}"
+        },
+        {
+            "test_point_Nr.": 9,
+            "type": "Order",
+            "content": "\nOrder ID: 009\nMaterial: Titanium\nProcessing: Drilling\nSpindle_rpm: 1000\nCutting_depth: 0.7\nCutting_length: 11\nPaint color: Red\nPaint mode: coat\n",
+            "plan": "{\n  \"Order ID\": \"009\",\n  \"Production Steps\": [\n    {\n      \"Step\": 1,\n      \"Description\": \"Dispatch workpieces from Storage Station\",\n      \"Agent\": \"Island I\",\n      \"Details\": [],\n      \"Duration\": \"15 minutes\"\n    },\n    {\n      \"Step\": 2,\n      \"Description\": \"Navigate from Island I to Island II\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island I\"}, {\"To\": \"Island II\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 3,\n      \"Description\": \"Drilling process\",\n      \"Agent\": \"Island II\",\n      \"Details\": [{\"material\": \"Titanium\"}, {\"processing\": \"Drilling\"}, {\"spindle_rpm\": 1000}, {\"cutting_depth\": 0.7}, {\"cutting_length\": 11}],\n      \"Duration\": \"30 minutes\"\n    },\n    {\n      \"Step\": 4,\n      \"Description\": \"Navigate from Island II to Island III\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island II\"}, {\"To\": \"Island III\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 5,\n      \"Description\": \"Painting process\",\n      \"Agent\": \"Island III\",\n      \"Details\": [{\"color\": \"Red\"}, {\"mode\": \"coat\"}],\n      \"Duration\": \"60 minutes\"\n    },\n    {\n      \"Step\": 6,\n      \"Description\": \"Navigate from Island III to Dispatching Zone\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island III\"}, {\"To\": \"Dispatching Zone\"}],\n      \"Duration\": \"5 minutes\"\n    }\n  ],\n  \"Estimated Total Duration\": \"2 hours\"\n}"
+        },
+        {
+            "test_point_Nr.": 10,
+            "type": "Order",
+            "content": "\nOrder ID: 010\nMaterial: Steel\nProcessing: Milling\nSpindle_rpm: 1000\nCutting_depth: 0.4\nCutting_length: 8\nPaint color: Red\nPaint mode: star\n",
+            "plan": "{\n  \"Order ID\": \"010\",\n  \"Production Steps\": [\n    {\n      \"Step\": 1,\n      \"Description\": \"Dispatching workpieces from Storage Station\",\n      \"Agent\": \"Island I\",\n      \"Details\": [],\n      \"Duration\": \"15 minutes\"\n    },\n    {\n      \"Step\": 2,\n      \"Description\": \"Navigate from Island I to Island II\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island I\"}, {\"To\": \"Island II\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 3,\n      \"Description\": \"Milling process\",\n      \"Agent\": \"Island II\",\n      \"Details\": [\n        {\"material\": \"Steel\"},\n        {\"processing\": \"Milling\"},\n        {\"spindle_rpm\": 1000},\n        {\"cutting_depth\": 0.4},\n        {\"cutting_length\": 8}\n      ],\n      \"Duration\": \"30 minutes\"\n    },\n    {\n      \"Step\": 4,\n      \"Description\": \"Navigate from Island II to Island III\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island II\"}, {\"To\": \"Island III\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 5,\n      \"Description\": \"Painting\",\n      \"Agent\": \"Island III\",\n      \"Details\": [\n        {\"color\": \"Red\"},\n        {\"mode\": \"star\"}\n      ],\n      \"Duration\": \"60 minutes\"\n    },\n    {\n      \"Step\": 6,\n      \"Description\": \"Navigate from Island III to Dispatching Zone\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island III\"}, {\"To\": \"Dispatching Zone\"}],\n      \"Duration\": \"5 minutes\"\n    }\n  ],\n  \"Estimated Total Duration\": \"2 hours\"\n}"
+        },
+        {
+            "test_point_Nr.": 11,
+            "type": "Order",
+            "content": "\nOrder ID: 011\nMaterial: Aluminum\nProcessing: Polishing\nSpindle_rpm: 1200\nCutting_depth: 1.0\nCutting_length: 12\nPaint color: Red\nPaint mode: triangle\n",
+            "plan": "{\n  \"Order ID\": \"011\",\n  \"Production Steps\": [\n    {\n      \"Step\": 1,\n      \"Description\": \"Dispatching workpieces from Storage Station\",\n      \"Agent\": \"Island I\",\n      \"Details\": [],\n      \"Duration\": \"15 minutes\"\n    },\n    {\n      \"Step\": 2,\n      \"Description\": \"Navigate from Island I to Island II\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island I\"}, {\"To\": \"Island II\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 3,\n      \"Description\": \"Polishing process\",\n      \"Agent\": \"Island II\",\n      \"Details\": [{\"material\": \"Aluminum\"}, {\"processing\": \"Polishing\"}, {\"spindle_rpm\": 1200}, {\"cutting_depth\": 1.0}, {\"cutting_length\": 12}],\n      \"Duration\": \"30 minutes\"\n    },\n    {\n      \"Step\": 4,\n      \"Description\": \"Navigate from Island II to Island III\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island II\"}, {\"To\": \"Island III\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 5,\n      \"Description\": \"Painting\",\n      \"Agent\": \"Island III\",\n      \"Details\": [{\"color\": \"Red\"}, {\"mode\": \"triangle\"}],\n      \"Duration\": \"1 hour\"\n    },\n    {\n      \"Step\": 6,\n      \"Description\": \"Navigate from Island III to Dispatching Zone\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island III\"}, {\"To\": \"Dispatching Zone\"}],\n      \"Duration\": \"5 minutes\"\n    }\n  ],\n  \"Estimated Total Duration\": \"2 hours\"\n}"
+        },
+        {
+            "test_point_Nr.": 12,
+            "type": "Order",
+            "content": "\nOrder ID: 012\nMaterial: Steel\nProcessing: Polishing\nSpindle_rpm: 1300\nCutting_depth: 1.2\nCutting_length: 13\n",
+            "plan": "{\n  \"Order ID\": \"012\",\n  \"Production Steps\": [\n    {\n      \"Step\": 1,\n      \"Description\": \"Dispatching workpieces from Storage Station\",\n      \"Agent\": \"Island I\",\n      \"Details\": [],\n      \"Duration\": \"15 minutes\"\n    },\n    {\n      \"Step\": 2,\n      \"Description\": \"navigate from Island I to Island II\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island I\"}, {\"To\": \"Island II\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 3,\n      \"Description\": \"Polishing process\",\n      \"Agent\": \"Island II\",\n      \"Details\": [{\"material\": \"Steel\"}, {\"processing\": \"Polishing\"}, {\"spindle_rpm\": 1300}, {\"cutting_depth\": 1.2}, {\"cutting_length\": 13}],\n      \"Duration\": \"30 minutes\"\n    },\n    {\n      \"Step\": 4,\n      \"Description\": \"navigate from Island II to Dispatching Zone\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island II\"}, {\"To\": \"Dispatching Zone\"}],\n      \"Duration\": \"5 minutes\"\n    }\n  ],\n  \"Estimated Total Duration\": \"55 minutes\"\n}"
+        },
+        {
+            "test_point_Nr.": 13,
+            "type": "Order",
+            "content": "\nOrder ID: 013\nMaterial: Copper\nPaint Color: Yellow\nPaint mode: star\n",
+            "plan": "{\n  \"Order ID\": \"013\",\n  \"Production Steps\": [\n    {\n      \"Step\": 1,\n      \"Description\": \"Dispatching workpieces from Storage Station\",\n      \"Agent\": \"Island I\",\n      \"Details\": [],\n      \"Duration\": \"15 minutes\"\n    },\n    {\n      \"Step\": 2,\n      \"Description\": \"Navigate from Island I to Island III\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island I\"}, {\"To\": \"Island III\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 3,\n      \"Description\": \"Painting\",\n      \"Agent\": \"Island III\",\n      \"Details\": [{\"color\": \"yellow\"}, {\"mode\": \"star\"}],\n      \"Duration\": \"1 hour\"\n    },\n    {\n      \"Step\": 4,\n      \"Description\": \"Navigate from Island III to Dispatching Zone\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island III\"}, {\"To\": \"Dispatching Zone\"}],\n      \"Duration\": \"5 minutes\"\n    }    \n  ],\n  \"Estimated Total Duration\": \"1 hour 25 minutes\"\n}"
+        },
+        {
+            "test_point_Nr.": 14,
+            "type": "Order",
+            "content": "\nOrder ID: 014\nMaterial: Steel\nProcessing: Polishing\nSpindle_rpm: 1500\nCutting_depth: 1.4\nCutting_length: 15\nPaint Color: Black\nPaint mode: rectangle\n",
+            "plan": "{\n  \"Order ID\": \"014\",\n  \"Production Steps\": [\n    {\n      \"Step\": 1,\n      \"Description\": \"Dispatching workpieces from Storage Station\",\n      \"Agent\": \"Island I\",\n      \"Details\": [],\n      \"Duration\": \"15 minutes\"\n    },\n    {\n      \"Step\": 2,\n      \"Description\": \"Navigate from Island I to Island II\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island I\"}, {\"To\": \"Island II\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 3,\n      \"Description\": \"Polishing process\",\n      \"Agent\": \"Island II\",\n      \"Details\": [{\"material\": \"Steel\"}, {\"processing\": \"Polishing\"}, {\"spindle_rpm\": 1500}, {\"cutting_depth\": 1.4}, {\"cutting_length\": 15}],\n      \"Duration\": \"30 minutes\"\n    },\n    {\n      \"Step\": 4,\n      \"Description\": \"Navigate from Island II to Island III\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island II\"}, {\"To\": \"Island III\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 5,\n      \"Description\": \"Painting process\",\n      \"Agent\": \"Island III\",\n      \"Details\": [{\"color\": \"Black\"}, {\"mode\": \"rectangle\"}],\n      \"Duration\": \"60 minutes\"\n    },\n    {\n      \"Step\": 6,\n      \"Description\": \"Navigate from Island III to Dispatching Zone\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island III\"}, {\"To\": \"Dispatching Zone\"}],\n      \"Duration\": \"5 minutes\"\n    }\n  ],\n  \"Estimated Total Duration\": \"2 hours\"\n}"
+        },
+        {
+            "test_point_Nr.": 15,
+            "type": "Order",
+            "content": "\nOrder ID: 015\nMaterial: Titanium\nProcessing: Polishing\nSpindle_rpm: 1800\nCutting_depth: 1.4\nCutting_length: 15\nPaint Color: Silver\nPaint mode: star\n",
+            "plan": "{\n  \"Order ID\": \"015\",\n  \"Production Steps\": [\n    {\n      \"Step\": 1,\n      \"Description\": \"Dispatching workpieces from Storage Station\",\n      \"Agent\": \"Island I\",\n      \"Details\": [],\n      \"Duration\": \"15 minutes\"\n    },\n    {\n      \"Step\": 2,\n      \"Description\": \"navigate from Island I to Island II\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island I\"}, {\"To\": \"Island II\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 3,\n      \"Description\": \"Polishing process\",\n      \"Agent\": \"Island II\",\n      \"Details\": [\n        {\"material\": \"Titanium\"},\n        {\"processing\": \"Polishing\"},\n        {\"spindle_rpm\": 1800},\n        {\"cutting_depth\": 1.4},\n        {\"cutting_length\": 15}\n      ],\n      \"Duration\": \"30 minutes\"\n    },\n    {\n      \"Step\": 4,\n      \"Description\": \"navigate from Island II to Island III\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island II\"}, {\"To\": \"Island III\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 5,\n      \"Description\": \"Painting\",\n      \"Agent\": \"Island III\",\n      \"Details\": [\n        {\"color\": \"Silver\"},\n        {\"mode\": \"star\"}\n      ],\n      \"Duration\": \"1 hour\"\n    },\n    {\n      \"Step\": 6,\n      \"Description\": \"navigate from Island III to Dispatching Zone\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island III\"}, {\"To\": \"Dispatching Zone\"}],\n      \"Duration\": \"5 minutes\"\n    }\n  ],\n  \"Estimated Total Duration\": \"2 hours\"\n}"
+        },
+        {
+            "test_point_Nr.": 16,
+            "type": "Order",
+            "content": "\nOrder ID: 016\nMaterial: Titanium\nProcessing: Milling\nSpindle_rpm: 1000\nCutting_depth: 1.5\nCutting_length: 15\n",
+            "plan": "{\n  \"Order ID\": \"016\",\n  \"Production Steps\": [\n    {\n      \"Step\": 1,\n      \"Description\": \"Dispatching workpieces from Storage Station\",\n      \"Agent\": \"Island I\",\n      \"Details\": [],\n      \"Duration\": \"15 minutes\"\n    },\n    {\n      \"Step\": 2,\n      \"Description\": \"Navigate from Island I to Island II\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island I\"}, {\"To\": \"Island II\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 3,\n      \"Description\": \"Milling process\",\n      \"Agent\": \"Island II\",\n      \"Details\": [{\"material\": \"Titanium\"}, {\"processing\": \"Milling\"}, {\"spindle_rpm\": 1000}, {\"cutting_depth\": 1.5}, {\"cutting_length\": 15}],\n      \"Duration\": \"30 minutes\"\n    },\n    {\n      \"Step\": 4,\n      \"Description\": \"Navigate from Island II to Dispatching Zone\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island II\"}, {\"To\": \"Dispatching Zone\"}],\n      \"Duration\": \"5 minutes\"\n    }    \n  ],\n  \"Estimated Total Duration\": \"55 minutes\"\n}\n"
+        },
+        {
+            "test_point_Nr.": 17,
+            "type": "Order",
+            "content": "\nOrder ID: 017\nMaterial: Steel\nPaint color: Black\nPaint mode: coat\n",
+            "plan": "{\n  \"Order ID\": \"017\",\n  \"Production Steps\": [\n    {\n      \"Step\": 1,\n      \"Description\": \"Dispatching from Storage Station\",\n      \"Agent\": \"Island I\",\n      \"Details\": [],\n      \"Duration\": \"15 minutes\"\n    },\n    {\n      \"Step\": 2,\n      \"Description\": \"Navigate to Island III\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island I\"}, {\"To\": \"Island III\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 3,\n      \"Description\": \"Painting\",\n      \"Agent\": \"Island III\",\n      \"Details\": [{\"color\": \"black\"}, {\"mode\": \"coat\"}],\n      \"Duration\": \"1 hour\"\n    },\n    {\n      \"Step\": 4,\n      \"Description\": \"Navigate to Dispatching Zone\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island III\"}, {\"To\": \"Dispatching Zone\"}],\n      \"Duration\": \"5 minutes\"\n    }\n  ],\n  \"Estimated Total Duration\": \"1 hour 25 minutes\"\n}"
+        },
+        {
+            "test_point_Nr.": 18,
+            "type": "Order",
+            "content": "\nOrder ID: 018\nMaterial: Aluminum\nProcessing: Polishing\nSpindle_rpm: 1000\nCutting_depth: 0.5\nCutting_length: 10\nPaint color: Green\nPaint mode: star\n",
+            "plan": "{\n  \"Order ID\": \"018\",\n  \"Production Steps\": [\n    {\n      \"Step\": 1,\n      \"Description\": \"Dispatching workpieces from Storage Station\",\n      \"Agent\": \"Island I\",\n      \"Details\": [],\n      \"Duration\": \"15 minutes\"\n    },\n    {\n      \"Step\": 2,\n      \"Description\": \"Navigate from Island I to Island II\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island I\"}, {\"To\": \"Island II\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 3,\n      \"Description\": \"Polishing process\",\n      \"Agent\": \"Island II\",\n      \"Details\": [{\"material\": \"Aluminum\"}, {\"processing\": \"Polishing\"}, {\"spindle_rpm\": 1000}, {\"cutting_depth\": 0.5}, {\"cutting_length\": 10}],\n      \"Duration\": \"30 minutes\"\n    },\n    {\n      \"Step\": 4,\n      \"Description\": \"Navigate from Island II to Island III\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island II\"}, {\"To\": \"Island III\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 5,\n      \"Description\": \"Painting process\",\n      \"Agent\": \"Island III\",\n      \"Details\": [{\"color\": \"Green\"}, {\"mode\": \"star\"}],\n      \"Duration\": \"1 hour\"\n    },\n    {\n      \"Step\": 6,\n      \"Description\": \"Navigate from Island III to Dispatching Zone\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island III\"}, {\"To\": \"Dispatching Zone\"}],\n      \"Duration\": \"5 minutes\"\n    }\n  ],\n  \"Estimated Total Duration\": \"2 hours\"\n}"
+        },
+        {
+            "test_point_Nr.": 19,
+            "type": "Order",
+            "content": "\nOrder ID: 019\nMaterial: Titanium\nProcessing: Drilling\nSpindle_rpm: 1000\nCutting_depth: 1.0\nCutting_length: 10\nPaint color: Red\nPaint mode: rectangle\n",
+            "plan": "{\n  \"Order ID\": \"019\",\n  \"Production Steps\": [\n    {\n      \"Step\": 1,\n      \"Description\": \"Dispatch workpieces from Storage Station\",\n      \"Agent\": \"Island I\",\n      \"Details\": [],\n      \"Duration\": \"15 minutes\"\n    },\n    {\n      \"Step\": 2,\n      \"Description\": \"Navigate from Island I to Island II\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island I\"}, {\"To\": \"Island II\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 3,\n      \"Description\": \"Drilling process\",\n      \"Agent\": \"Island II\",\n      \"Details\": [{\"material\": \"Titanium\"}, {\"processing\": \"Drilling\"}, {\"spindle_rpm\": 1000}, {\"cutting_depth\": 1.0}, {\"cutting_length\": 10}],\n      \"Duration\": \"30 minutes\"\n    },\n    {\n      \"Step\": 4,\n      \"Description\": \"Navigate from Island II to Island III\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island II\"}, {\"To\": \"Island III\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 5,\n      \"Description\": \"Painting process\",\n      \"Agent\": \"Island III\",\n      \"Details\": [{\"color\": \"Red\"}, {\"mode\": \"rectangle\"}],\n      \"Duration\": \"60 minutes\"\n    },\n    {\n      \"Step\": 6,\n      \"Description\": \"Navigate from Island III to Dispatching Zone\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island III\"}, {\"To\": \"Dispatching Zone\"}],\n      \"Duration\": \"5 minutes\"\n    }\n  ],\n  \"Estimated Total Duration\": \"2 hours\"\n}"
+        },
+        {
+            "test_point_Nr.": 20,
+            "type": "Order",
+            "content": "\nOrder ID: 020\nMaterial: Steel\nProcessing: Polishing\nSpindle_rpm: 1000\nCutting_depth: 0.4\nCutting_length: 8\nPaint color: Red\nPaint mode: star\n",
+            "plan": "{\n  \"Order ID\": \"020\",\n  \"Production Steps\": [\n    {\n      \"Step\": 1,\n      \"Description\": \"Dispatching workpieces from Storage Station\",\n      \"Agent\": \"Island I\",\n      \"Details\": [],\n      \"Duration\": \"15 minutes\"\n    },\n    {\n      \"Step\": 2,\n      \"Description\": \"Navigate from Island I to Island II\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island I\"}, {\"To\": \"Island II\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 3,\n      \"Description\": \"Polishing process\",\n      \"Agent\": \"Island II\",\n      \"Details\": [\n        {\"material\": \"Steel\"},\n        {\"processing\": \"Polishing\"},\n        {\"spindle_rpm\": 1000},\n        {\"cutting_depth\": 0.4},\n        {\"cutting_length\": 8}\n      ],\n      \"Duration\": \"30 minutes\"\n    },\n    {\n      \"Step\": 4,\n      \"Description\": \"Navigate from Island II to Island III\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island II\"}, {\"To\": \"Island III\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 5,\n      \"Description\": \"Painting\",\n      \"Agent\": \"Island III\",\n      \"Details\": [\n        {\"color\": \"Red\"},\n        {\"mode\": \"star\"}\n      ],\n      \"Duration\": \"60 minutes\"\n    },\n    {\n      \"Step\": 6,\n      \"Description\": \"Navigate from Island III to Dispatching Zone\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island III\"}, {\"To\": \"Dispatching Zone\"}],\n      \"Duration\": \"5 minutes\"\n    }\n  ],\n  \"Estimated Total Duration\": \"2 hours\"\n}"
+        },
+        {
+            "test_point_Nr.": 21,
+            "type": "Order",
+            "content": "\nOrder ID: 021\nMaterial: Aluminum\nProcessing: Milling\nSpindle_rpm: 1500\nCutting_depth: 1.0\nCutting_length: 10\nPaint color: Red\nPaint mode: coat\n",
+            "plan": "{\n  \"Order ID\": \"021\",\n  \"Production Steps\": [\n    {\n      \"Step\": 1,\n      \"Description\": \"Dispatching workpieces from Storage Station\",\n      \"Agent\": \"Island I\",\n      \"Details\": [],\n      \"Duration\": \"15 minutes\"\n    },\n    {\n      \"Step\": 2,\n      \"Description\": \"Navigate from Island I to Island II\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island I\"}, {\"To\": \"Island II\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 3,\n      \"Description\": \"Milling process\",\n      \"Agent\": \"Island II\",\n      \"Details\": [{\"material\": \"Aluminum\"}, {\"processing\": \"Milling\"}, {\"spindle_rpm\": 1500}, {\"cutting_depth\": 1.0}, {\"cutting_length\": 10}],\n      \"Duration\": \"30 minutes\"\n    },\n    {\n      \"Step\": 4,\n      \"Description\": \"Navigate from Island II to Island III\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island II\"}, {\"To\": \"Island III\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 5,\n      \"Description\": \"Painting\",\n      \"Agent\": \"Island III\",\n      \"Details\": [{\"color\": \"Red\"}, {\"mode\": \"coat\"}],\n      \"Duration\": \"1 hour\"\n    },\n    {\n      \"Step\": 6,\n      \"Description\": \"Navigate from Island III to Dispatching Zone\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island III\"}, {\"To\": \"Dispatching Zone\"}],\n      \"Duration\": \"5 minutes\"\n    }\n  ],\n  \"Estimated Total Duration\": \"2 hours\"\n}"
+        },
+        {
+            "test_point_Nr.": 22,
+            "type": "Order",
+            "content": "\nOrder ID: 022\nMaterial: Steel\nProcessing: Milling\nSpindle_rpm: 1300\nCutting_depth: 1.2\nCutting_length: 10\n",
+            "plan": "{\n  \"Order ID\": \"022\",\n  \"Production Steps\": [\n    {\n      \"Step\": 1,\n      \"Description\": \"Dispatching workpieces from Storage Station\",\n      \"Agent\": \"Island I\",\n      \"Details\": [],\n      \"Duration\": \"15 minutes\"\n    },\n    {\n      \"Step\": 2,\n      \"Description\": \"navigate from Island I to Island II\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island I\"}, {\"To\": \"Island II\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 3,\n      \"Description\": \"Milling process\",\n      \"Agent\": \"Island II\",\n      \"Details\": [{\"material\": \"Steel\"}, {\"processing\": \"Milling\"}, {\"spindle_rpm\": 1300}, {\"cutting_depth\": 1.2}, {\"cutting_length\": 10}],\n      \"Duration\": \"30 minutes\"\n    },\n    {\n      \"Step\": 4,\n      \"Description\": \"navigate from Island II to Dispatching Zone\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island II\"}, {\"To\": \"Dispatching Zone\"}],\n      \"Duration\": \"5 minutes\"\n    }\n  ],\n  \"Estimated Total Duration\": \"55 minutes\"\n}"
+        },
+        {
+            "test_point_Nr.": 23,
+            "type": "Order",
+            "content": "\nOrder ID: 023\nMaterial: Copper\nPaint Color: Silver\nPaint mode: coat\n",
+            "plan": "{\n  \"Order ID\": \"023\",\n  \"Production Steps\": [\n    {\n      \"Step\": 1,\n      \"Description\": \"Dispatching workpieces from Storage Station\",\n      \"Agent\": \"Island I\",\n      \"Details\": [],\n      \"Duration\": \"15 minutes\"\n    },\n    {\n      \"Step\": 2,\n      \"Description\": \"Navigate from Island I to Island III\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island I\"}, {\"To\": \"Island III\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 3,\n      \"Description\": \"Painting\",\n      \"Agent\": \"Island III\",\n      \"Details\": [{\"color\": \"silver\"}, {\"mode\": \"coat\"}],\n      \"Duration\": \"1 hour\"\n    },\n    {\n      \"Step\": 4,\n      \"Description\": \"Navigate from Island III to Dispatching Zone\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island III\"}, {\"To\": \"Dispatching Zone\"}],\n      \"Duration\": \"5 minutes\"\n    }    \n  ],\n  \"Estimated Total Duration\": \"1 hour 25 minutes\"\n}"
+        },
+        {
+            "test_point_Nr.": 24,
+            "type": "Order",
+            "content": "\nOrder ID: 024\nMaterial: Steel\nProcessing: Drilling\nSpindle_rpm: 1300\nCutting_depth: 2.0\nCutting_length: 15\nPaint Color: Black\nPaint mode: coat\n",
+            "plan": "{\n  \"Order ID\": \"024\",\n  \"Production Steps\": [\n    {\n      \"Step\": 1,\n      \"Description\": \"Dispatching workpieces from Storage Station\",\n      \"Agent\": \"Island I\",\n      \"Details\": [],\n      \"Duration\": \"15 minutes\"\n    },\n    {\n      \"Step\": 2,\n      \"Description\": \"Navigate from Island I to Island II\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island I\"}, {\"To\": \"Island II\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 3,\n      \"Description\": \"Drilling process\",\n      \"Agent\": \"Island II\",\n      \"Details\": [{\"material\": \"Steel\"}, {\"processing\": \"Drilling\"}, {\"spindle_rpm\": 1300}, {\"cutting_depth\": 2.0}, {\"cutting_length\": 15}],\n      \"Duration\": \"30 minutes\"\n    },\n    {\n      \"Step\": 4,\n      \"Description\": \"Navigate from Island II to Island III\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island II\"}, {\"To\": \"Island III\"}],\n      \"Duration\": \"5 minutes\"\n    },\n    {\n      \"Step\": 5,\n      \"Description\": \"Painting process\",\n      \"Agent\": \"Island III\",\n      \"Details\": [{\"color\": \"Black\"}, {\"mode\": \"coat\"}],\n      \"Duration\": \"60 minutes\"\n    },\n    {\n      \"Step\": 6,\n      \"Description\": \"Navigate from Island III to Dispatching Zone\",\n      \"Agent\": \"Robotino\",\n      \"Details\": [{\"From\": \"Island III\"}, {\"To\": \"Dispatching Zone\"}],\n      \"Duration\": \"5 minutes\"\n    }\n  ],\n  \"Estimated Total Duration\": \"2 hours\"\n}"
+        }
+    ]
+}

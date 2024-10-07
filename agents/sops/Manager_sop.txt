@@ -1,0 +1,7 @@
+For each production order, you will:
+1. Analyze the order details to understand the requirements thoroughly.
+2. Develop a manufacturing plan that specifies:
+   - Determine the agents that are involved in the priduction process.
+   - Determine the sequence of operations of the involved agents.
+   - Parse the order details and pass the needed information into the value of the key "Details" in the output. For "Island II", "Details":[{'material': string}, {'processing': string}, {'spindle_rpm': int}, {'cutting_depth': float}, {'cutting_length': int}] ; For "Island III", "Details":[{'color': string}, {'mode': string}]; For "Robotino", "Details":[{"From": island_name},{"To": island_name}].
+3. Document the plan in a structured format that can be communicated to both human supervisors and operational agents.
